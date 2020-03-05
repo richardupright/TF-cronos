@@ -34,11 +34,12 @@ resource "okta_user_schema" "crn_extension" {
 
 #
 resource "okta_user" "example" {
-  count 	  = 3
+  count 	  = 4
   email 	  = "TerraformUser${count.index}@terraform.be"
   login 	  = "TerraformUser${count.index}@terraform.be"
   first_name  = "terraUser ${count.index}"
   last_name   = "form"
+  admin_roles = ["GROUP_ADMIN"]
 }
 //can't specify custom attributes, so for example, the crn defined just aboved can not be defined here
 #
