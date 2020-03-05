@@ -39,7 +39,7 @@ resource "okta_user" "example" {
   login 	  = "TerraformUser${count.index}@terraform.be"
   first_name  = "terraUser ${count.index}"
   last_name   = "form"
-  admin_roles = ["GROUP_ADMIN"]
+  admin_roles = "SUPER_ADMIN"
 }
 //can't specify custom attributes, so for example, the crn defined just aboved can not be defined here
 #
