@@ -34,7 +34,7 @@ resource "okta_user_schema" "crn_extension" {
     
 #
 resource "okta_user" "example" {
-  count 3
+  count = 3
   email = "TerraformUser${count.index}@terraform.be"
   login = "TerraformUser${count.index}@terraform.be"
   first_name = "terraUser ${count.index}"
