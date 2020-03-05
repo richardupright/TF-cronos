@@ -25,7 +25,7 @@ resource "okta_user_schema" "dob_extension" {
 resource "okta_user_schema" "crn_extension" {
   index  = "customer_reference_number"
   title  = "Customer Reference Number"
-  required = true
+  required = false
   type   = "string"
   master = "PROFILE_MASTER"
   depends_on = [okta_user_schema.dob_extension]
@@ -39,6 +39,6 @@ resource "okta_user" "example" {
   login 	  = "TerraformUser${count.index}@terraform.be"
   first_name  = "terraUser ${count.index}"
   last_name   = "form"
-  customer_reference_number = "abc123"
 }
+//can't specify custom attributes, so for example, the crn defined just aboved can not be defined here
 #
