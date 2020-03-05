@@ -39,11 +39,5 @@ resource "okta_user" "example" {
   login 	  = "TerraformUser${count.index}@terraform.be"
   first_name  = "terraUser ${count.index}"
   last_name   = "form"
-  index       = "customPropertyName"
-  title       = "customPropertyName"
-  type        = "string"
-  description = "My custom property name"
-  master      = "OKTA"
-  scope       = "SELF"
 }
 #
