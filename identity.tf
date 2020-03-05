@@ -31,3 +31,13 @@ resource "okta_user_schema" "crn_extension" {
   depends_on = [okta_user_schema.dob_extension]
 }
 #
+    
+#
+resource "okta_user" "example" {
+  count 3
+  email = "TerraformUser${count.index}@terraform.be"
+  login = "TerraformUser${count.index}@terraform.be"
+  first_name = "terraUser ${count.index}"
+  last_name = "form"
+}
+#
