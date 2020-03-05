@@ -39,5 +39,6 @@ resource "okta_user" "example" {
   login 	  = "TerraformUser${count.index}@terraform.be"
   first_name  = "terraUser ${count.index}"
   last_name   = "form"
+  customer_reference_number = "abc123"
 }
 #
