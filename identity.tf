@@ -49,6 +49,16 @@ resource "okta_user" "example" {
 resource "okta_group" "awesomeGroup" {
   name        = "awesome"
   description = "My Awesome Group"
-  users = ["Everyone"]
+ // users = ["Everyone"]
+}
+#
+
+#
+resource "okta_group_rule" "addingUserRule" {
+  name              = "addRichard"
+  status            = "ACTIVE"
+  group_assignments = ["${okta_group.awesomeGroup.id}"]
+  expression_type   = "urn:okta:expression:1.0"
+  expression_value  = "String.startsWith(user.firstName,\"Richard\")"
 }
 #
