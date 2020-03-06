@@ -80,6 +80,7 @@ resource "okta_group_rule" "addingUserRule" {
 }
 #
 
+//every factors needs to be manually enabled on okta before applying this rule
 resource "okta_policy_mfa" "testmfa" {
   name        = "addingMFAfromTerraform"
   status      = "ACTIVE"
@@ -96,4 +97,12 @@ resource "okta_policy_mfa" "testmfa" {
   }
 
   groups_included = ["${okta_group.awesomeGroup.id}"]
+}
+
+resource "okta_policy_rule_mfa" {
+  policyid =  "${okta_policy_mfa.id}"
+  name = "rule for mfa policy"
+  status = "ACTIVE" //or "INACTIVE".
+  enroll = "LOGIN" //It can be "CHALLENGE", "LOGIN", or "NEVER".
+  network_connection = "ANYWHERE" // "ZONE", "ON_NETWORK", or "OFF_NETWORK".
 }
