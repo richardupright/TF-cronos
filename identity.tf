@@ -1,4 +1,4 @@
-#
+# Defining variable here to use if after, but they are initialized on Terraform (in environnment variables)
 variable "org_name" {}
 variable "api_token" {}
 variable "base_url" {}
@@ -79,3 +79,21 @@ resource "okta_group_rule" "addingUserRule" {
 //expression_value  = "String.substringAfter(user.login, \"@\") == \"${var.domain}\""
 }
 #
+
+resource "okta_policy_mfa" "testmfa" {
+  name        = "addingMFAfromTerraform"
+  status      = "ACTIVE"
+  description = "my awesome mfa polciy"
+
+  okta_otp = {
+    enroll = "REQUIRED"
+  }
+  okta_push = {
+    enroll = "OPTIONAL"
+  }
+  google_otp = {
+    enroll = "OPTIONAL"
+  }
+
+  groups_included = ["${data.okta_group.everyone.id}"]
+}
