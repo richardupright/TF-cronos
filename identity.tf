@@ -53,6 +53,11 @@ resource "okta_group" "awesomeGroup" {
 }
 #
 
+resource okta_group_roles roles {
+  group_id    = "${okta_group.awesomeGroup.id}"
+  admin_roles = ["SUPER_ADMIN"]
+}
+
 variable domain {
   default = "example.com"
 }
@@ -64,7 +69,6 @@ variable enable_group_rule {
 resource "okta_group_rule" "addingUserRule" {
 // Do not create if group rule feature is not available
  // count             = "${var.enable_group_rule ? 1 : 0}"
-  group_membership_rules = true
   name              = "addRichard"
   status            = "ACTIVE"
   group_assignments = ["${okta_group.awesomeGroup.id}"]
