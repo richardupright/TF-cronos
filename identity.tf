@@ -80,13 +80,10 @@ resource "okta_group_rule" "addingUserRule" {
 }
 #
 
-resource "okta_factor" "okta_otp" {
-  provider = "okta_otp"
-  //active = true is default
+resource "okta_factor" "example" {
+  provider = "google_otp"
 }
-resource "okta_factor" "rsa_token" {
-  provider = "rsa_token"
-}
+
 
 resource "okta_policy_mfa" "testmfa" {
   name        = "addingMFAfromTerraform"
