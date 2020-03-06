@@ -95,5 +95,5 @@ resource "okta_policy_mfa" "testmfa" {
     enroll = "OPTIONAL"
   }
 
-  groups_included = ["${data.okta_group.everyone.id}"]
+  groups_included = ["${okta_group.awesomeGroup.id}"]
 }
