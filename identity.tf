@@ -63,7 +63,7 @@ variable enable_group_rule {
 #
 resource "okta_group_rule" "addingUserRule" {
 // Do not create if group rule feature is not available
-  count             = "${var.enable_group_rule ? 1 : 0}"
+ // count             = "${var.enable_group_rule ? 1 : 0}"
 
   name              = "addRichard"
   status            = "ACTIVE"
