@@ -49,6 +49,6 @@ resource "okta_user" "example" {
 resource "okta_group" "awesomeGroup" {
   name        = "awesome"
   description = "My Awesome Group"
-  users = ["richard.dedecker@uprightsecurity.be", "mickeymouse@uprightsecurity.be"]
+  users = ["richard.dedecker@uprightsecurity.be"]
 }
 #
