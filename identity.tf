@@ -81,7 +81,7 @@ resource "okta_group_rule" "addingUserRule" {
 #
 
 resource "okta_factor" "example" {
-  provider = "google_otp"
+  provider = rsa_token
 }
 
 
