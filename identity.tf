@@ -99,7 +99,7 @@ resource "okta_policy_mfa" "testmfa" {
   groups_included = ["${okta_group.awesomeGroup.id}"]
 }
 
-resource "okta_policy_rule_mfa" {
+resource "okta_policy_rule_mfa" "mfarulepolicy"{
   policyid =  "${okta_policy_mfa.id}"
   name = "rule for mfa policy"
   status = "ACTIVE" //or "INACTIVE".
