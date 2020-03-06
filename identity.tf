@@ -80,7 +80,14 @@ resource "okta_group_rule" "addingUserRule" {
 }
 #
 
-//every factors needs to be manually enabled on okta before applying this rule
+resource "okta_factor" "okta_otp" {
+  provider = "okta_otp"
+  //active = true is default
+}
+resource "okta_factor" "rsa_token" {
+  provider = "rsa_token"
+}
+
 resource "okta_policy_mfa" "testmfa" {
   name        = "addingMFAfromTerraform"
   status      = "ACTIVE"
