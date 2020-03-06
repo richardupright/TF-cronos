@@ -80,8 +80,16 @@ resource "okta_group_rule" "addingUserRule" {
 }
 #
 
-resource "okta_factor" "example" {
+resource "okta_factor" "okta" {
   provider = "OKTA"
+}
+
+resource "okta_factor" "google" {
+  provider = "GOOGLE"
+}
+resource "okta_factor" "rsa" {
+  provider = "RSA"
+  //factor_type = token
 }
 
 
