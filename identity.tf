@@ -8,7 +8,7 @@ provider "okta" {
     base_url = var.base_url
     api_token = var.api_token
 }
-//This includes the Okta extension for Terraform and provides the 
+//This includes the Okta extension for Terraform and provides the
 //three variables from our okta.auto.tfvars file to configure it.
 #
 
@@ -64,7 +64,7 @@ variable enable_group_rule {
 resource "okta_group_rule" "addingUserRule" {
 // Do not create if group rule feature is not available
  // count             = "${var.enable_group_rule ? 1 : 0}"
-
+  group_membership_rules = true
   name              = "addRichard"
   status            = "ACTIVE"
   group_assignments = ["${okta_group.awesomeGroup.id}"]
@@ -73,5 +73,3 @@ resource "okta_group_rule" "addingUserRule" {
 //expression_value  = "String.substringAfter(user.login, \"@\") == \"${var.domain}\""
 }
 #
-
-
