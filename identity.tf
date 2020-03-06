@@ -49,7 +49,7 @@ resource "okta_user" "example" {
 resource "okta_group" "awesomeGroup" {
   name        = "awesome"
   description = "My Awesome Group"
-  users = ["okta_user.example[1].id"]
+  //users = ["okta_user.example[1].id"]
 }
 #
 
@@ -64,12 +64,12 @@ variable domain {
 }
 
 variable enable_group_rule {
-  default = false
+  default = true
 }
 #
 resource "okta_group_rule" "addingUserRule" {
 // Do not create if group rule feature is not available
- // count             = "${var.enable_group_rule ? 1 : 0}"
+  count             = "${var.enable_group_rule ? 1 : 0}"
   name              = "addRichard"
   status            = "ACTIVE"
   group_assignments = ["${okta_group.awesomeGroup.id}"]
