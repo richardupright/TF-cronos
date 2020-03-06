@@ -49,12 +49,13 @@ resource "okta_user" "example" {
 resource "okta_group" "awesomeGroup" {
   name        = "awesome"
   description = "My Awesome Group"
- // users = ["${mickeymouse@uprightsecurity.be"]
+  users = ["okta_user.example[1].id"]
 }
 #
 
 resource okta_group_roles roles {
-  group_id    = "${okta_group.awesomeGroup.id}"
+  //group_id    = "${okta_group.awesomeGroup.id}" //deprecated style (0.11)
+  group_id    = "okta_group.awesomeGroup.id"
   admin_roles = ["SUPER_ADMIN"]
 }
 
