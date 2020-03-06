@@ -54,9 +54,9 @@ resource "okta_group" "awesomeGroup" {
 #
 
 resource okta_group_roles roles {
-  //group_id    = "${okta_group.awesomeGroup.id}" //deprecated style (0.11)
-  group_id    = "okta_group.awesomeGroup.id"
-  admin_roles = ["SUPER_ADMIN"]
+  group_id    = "${okta_group.awesomeGroup.id}" //deprecated style (0.11)
+//  group_id    = "okta_group.awesomeGroup.id" //0.12 style
+  //admin_roles = ["SUPER_ADMIN"]
 }
 
 variable domain {
@@ -67,6 +67,7 @@ variable enable_group_rule {
   default = true
 }
 #
+//group membership rules cannot be created for groups with administrators roles
 resource "okta_group_rule" "addingUserRule" {
 // Do not create if group rule feature is not available
   count             = "${var.enable_group_rule ? 1 : 0}"
