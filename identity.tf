@@ -49,16 +49,22 @@ resource "okta_user" "example" {
 resource "okta_group" "awesomeGroup" {
   name        = "awesome"
   description = "My Awesome Group"
- // users = ["Everyone"]
+ // users = ["${mickeymouse@uprightsecurity.be"]
 }
 #
 
 #
 resource "okta_group_rule" "addingUserRule" {
+// Do not create if group rule feature is not available
+  count             = "${var.enable_group_rule ? 1 : 0}"
+
   name              = "addRichard"
   status            = "ACTIVE"
   group_assignments = ["${okta_group.awesomeGroup.id}"]
   expression_type   = "urn:okta:expression:1.0"
   expression_value  = "String.startsWith(user.firstName,\"Richard\")"
+//expression_value  = "String.substringAfter(user.login, \"@\") == \"${var.domain}\""
 }
 #
+
+
