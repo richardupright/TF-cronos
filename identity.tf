@@ -53,11 +53,11 @@ resource "okta_group" "awesomeGroup" {
 }
 #
 
-resource okta_group_roles roles {
-  group_id    = "${okta_group.awesomeGroup.id}" //deprecated style (0.11)
+//resource okta_group_roles roles {
+//  group_id    = "${okta_group.awesomeGroup.id}" //deprecated style (0.11)
 //  group_id    = "okta_group.awesomeGroup.id" //0.12 style
   //admin_roles = ["SUPER_ADMIN"]
-}
+//}
 
 variable domain {
   default = "example.com"
