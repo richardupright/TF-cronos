@@ -100,7 +100,7 @@ resource "okta_policy_mfa" "testmfa" {
 }
 
 resource "okta_policy_rule_mfa" "mfarulepolicy"{
-  policyid =  "${okta_policy_mfa.id}"
+  policyid =  "${okta_policy_mfa.testmfa.id}"
   name = "rule for mfa policy"
   status = "ACTIVE" //or "INACTIVE".
   enroll = "LOGIN" //It can be "CHALLENGE", "LOGIN", or "NEVER".
