@@ -33,6 +33,7 @@ resource "okta_user_schema" "crn_extension" {
 #
 
 #
+//creates four new users (0,1,2,3)
 resource "okta_user" "example" {
   count 	  = 4
   email 	  = "TerraformUser${count.index}@terraform.be"
