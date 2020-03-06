@@ -44,3 +44,11 @@ resource "okta_user" "example" {
 }
 //can't specify custom attributes, so for example, the crn defined just aboved can not be defined here
 #
+
+#
+resource "okta_group" "awesomeGroup" {
+  name        = "awesome"
+  description = "My Awesome Group"
+  user = "TerraformUser1"
+}
+#
