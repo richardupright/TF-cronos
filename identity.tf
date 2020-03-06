@@ -81,17 +81,37 @@ resource "okta_group_rule" "addingUserRule" {
 #
 
 resource "okta_factor" "okta" {
+  //factor_type="question"
+  //factor_type="sms"
+  //factor_type="call"
+  //factor_type="token:software:totp"
+  //factor_type="push"
+  //factorType="email"
   provider = "OKTA"
 }
+resource "okta_factor" "yubico" {
+  provider = "YUBICO"
+  //factorType="token:hardware"
+  //factorType="webauthn"
+}
+resource "okta_factor" "fido" {
+  provider = "FIDO"
+  //factorType="u2f"
+}
+
 
 resource "okta_factor" "google" {
+  //factor_type="token:software:totp"
   provider = "GOOGLE"
 }
 resource "okta_factor" "rsa" {
   provider = "RSA"
   //factor_type = token
 }
-
+resource "okta_factor" "symantec" {
+  provider = "SYMANTEC"
+  //factor_type = token
+}
 
 resource "okta_policy_mfa" "testmfa" {
   name        = "addingMFAfromTerraform"
