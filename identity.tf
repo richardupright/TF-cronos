@@ -53,6 +53,13 @@ resource "okta_group" "awesomeGroup" {
 }
 #
 
+variable domain {
+  default = "example.com"
+}
+
+variable enable_group_rule {
+  default = false
+}
 #
 resource "okta_group_rule" "addingUserRule" {
 // Do not create if group rule feature is not available
