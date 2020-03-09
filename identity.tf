@@ -93,10 +93,10 @@ resource "okta_group_rule" "addingUserRule" {
 //   provider = "GOOGLE"
 // }
 resource "okta_factor" "rsa" {
-  provider = "RSA"
+  provider = "rsa_token"
 }
 resource "okta_factor" "symantec" {
-  provider = "SYMANTEC"
+  provider = "symantec_token"
 }
 
 resource "okta_policy_mfa" "testmfa" {
