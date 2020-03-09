@@ -130,9 +130,9 @@ resource "okta_policy_mfa" "testmfa" {
     enroll    = "OPTIONAL"
   }
   depends_on  = [
-    "okta_factor.okta_otp",
-    "okta_factor.google_otp",
-    "okta_factor.okta_push",
+    okta_factor.okta_otp,
+    okta_factor.google_otp,
+    okta_factor.okta_push,
   ]
 
   groups_included = ["${okta_group.awesomeGroup.id}"]
@@ -188,14 +188,14 @@ resource "okta_policy_rule_password" "tfpwdpolicyrule" {
 ################################################################################
 
 ###################### /////  SIGN ON POLICY \\\\\\ ############################
-resource okta_policy_signon mySOpolicy {
+resource "okta_policy_signon" "mySOpolicy" {
   name            = "super sign on policy"
   status          = "ACTIVE"
   description     = "description of my policy"
   groups_included = ["${okta_group.awesomeGroup.id}"]
 }
 
-resource okta_policy_rule_signon test {
+resource "okta_policy_rule_signon" "test" {
   policyid           = "${okta_policy_signon.mySOpolicy.id}"
   name               = "super sign on rule"
   status             = "ACTIVE"
@@ -208,19 +208,32 @@ resource okta_policy_rule_signon test {
 ################################################################################
 
 ###################### /////  TEMPLATE EMAIL \\\\\\ ############################
-resource okta_template_email test {
-  type = "email.forgotPassword"
+// **** To update the default email template, need to uprage Okta ****
+// resource "okta_template_email" "test" {
+//   type = "email.forgotPassword"
+//
+//   translations {
+//     language = "en"
+//     subject  = "You forgot your password again ?"
+//     template = "Hi $${user.firstName},<br/><br/>click here $${resetPasswordLink}"
+//   }
+//
+//   translations {
+//     language = "fr"
+//     subject  = "Tu as oublié ton mot de passe hein ? "
+//     template = "Alors $${user.firstName},<br/><br/>Clique ici $${resetPasswordLink}"
+//   }
+// }
+################################################################################
 
-  translations {
-    language = "en"
-    subject  = "You forgot your password again ?"
-    template = "Hi $${user.firstName},<br/><br/>click here $${resetPasswordLink}"
-  }
-
-  translations {
-    language = "fr"
-    subject  = "Tu as oublié ton mot de passe hein ? "
-    template = "Alors $${user.firstName},<br/><br/>Clique ici $${resetPasswordLink}"
-  }
+###################### /////  ADD OAUTH APP \\\\\\ #############################
+resource "okta_app_oauth" "f1" {
+  label                      = "F1DEMO"
+  type                       = "native" //web
+  grant_types                = ["authorization_code", "refresh_token"]
+  redirect_uris              = ["http://localhost:8080/authorization-code/callback","http://localhost:8080/login/oauth2/code/okta"]
+  response_types             = ["code", "token", "id_token"]
+  login_uri                  = "http://localhost:8080/custom-login"
+  issuer_url                 = "CUSTOM_URL" //ORG_URL
 }
 ################################################################################
