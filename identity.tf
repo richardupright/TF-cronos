@@ -150,7 +150,7 @@ resource "okta_policy_password" "tfpwdpolicy" {
   status                 = "ACTIVE"
   description            = "waow this is the worst policy ever !"
   groups_included = ["${okta_group.awesomeGroup.id}"]
-  password_min_length = 2 //default is 8
+  password_min_length = 1 //default is 8
   password_min_lowercase = 1 //min nbr of lowercase
   password_min_uppercase = 0
   password_min_number = 0 //nbr of 'numbers'
@@ -167,8 +167,8 @@ resource "okta_policy_password" "tfpwdpolicy" {
   password_auto_unlock_minutes = 0 //0 = no limit.
   password_show_lockout_failures = false
   question_min_length = 0
-  email_recovery = "INACTIVE"
+  email_recovery = "ACTIVE"
   recovery_email_token = 3600 // Lifetime in minutes of the recovery email token.
-  sms_recovery = "INACTIVE"
-  question_recovery = "INACTIVE"
+  sms_recovery = "ACTIVE"
+  question_recovery = "ACTIVE"
 }
