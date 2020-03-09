@@ -237,4 +237,17 @@ resource "okta_app_oauth" "f1" {
   issuer_mode                 = "ORG_URL" //CUSTOM_URL
 }
 ################################################################################
-//test 
+
+  ###################### /////  NETWORK ZONE \\\\\\ ############################
+resource "okta_network_zone" "myZone" {
+  name     = "Area 51"
+  type     = "IP"
+  gateways = ["18.188.148.92-18.188.148.92"]
+  //proxies  = ["2.2.3.4/24", "3.3.4.5-3.3.4.15"]
+}
+resource "okta_network_zone" "dynamic_network_zone_example" {
+  name              = "Dynamic zone for US and BE"
+  type              = "DYNAMIC"
+  dynamic_locations = ["US", "BE"]
+}
+################################################################################
