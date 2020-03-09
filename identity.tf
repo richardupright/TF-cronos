@@ -11,6 +11,9 @@ provider "okta" {
 //This includes the Okta extension for Terraform and provides the
 //three variables from our okta.auto.tfvars file to configure it.
 #
+data okta_group all {
+  name = "Everyone"
+}
 
 #
 resource "okta_user_schema" "dob_extension" {
@@ -171,4 +174,15 @@ resource "okta_policy_password" "tfpwdpolicy" {
   recovery_email_token = 3600 // Lifetime in minutes of the recovery email token.
   sms_recovery = "ACTIVE"
   question_recovery = "ACTIVE"
+}
+
+resource "okta_policy_rule_password" "tfpwdpolicyrule" {
+  policyid = "${okta_policy_password.tfpwdpolicy.id}"
+name = "great rule"
+status = "ACTIVE"
+password_change = "ALLOW" //default is allow
+password_reset = "ALLOW"
+password_unlock = "DENY" // default is DENY"
+network_connection = "ANYWHERE" // "ZONE", "ON_NETWORK", or "OFF_NETWORK".
+
 }
