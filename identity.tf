@@ -234,6 +234,6 @@ resource "okta_app_oauth" "f1" {
   redirect_uris              = ["http://localhost:8080/authorization-code/callback","http://localhost:8080/login/oauth2/code/okta"]
   response_types             = ["code", "token", "id_token"]
   login_uri                  = "http://localhost:8080/custom-login"
-  issuer_url                 = "CUSTOM_URL" //ORG_URL
+  issuer_mode                 = "CUSTOM_URL" //ORG_URL
 }
 ################################################################################
