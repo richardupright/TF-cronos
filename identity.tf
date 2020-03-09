@@ -92,12 +92,12 @@ resource "okta_group_rule" "addingUserRule" {
 // resource "okta_factor" "google" {
 //   provider = "GOOGLE"
 // }
-resource "okta_factor" "rsa" {
-  provider = "okta.RsaTokenFactor"
-}
-resource "okta_factor" "symantec" {
-  provider = "okta.SymantecVipFactor"
-}
+// resource "okta_factor" "rsa" {
+//   provider = "okta.RsaTokenFactor"
+// }
+// resource "okta_factor" "symantec" {
+//   provider = "okta.SymantecVipFactor"
+// }
 
 resource "okta_policy_mfa" "testmfa" {
   name        = "addingMFAfromTerraform"
