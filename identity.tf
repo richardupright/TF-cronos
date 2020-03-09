@@ -83,12 +83,12 @@ resource "okta_group_rule" "addingUserRule" {
 // resource "okta_factor" "oktaCall" {
 //   provider_id = "okta_call"
 // }
-// resource "okta_factor" "oktaPush" {
-//   provider_id = "okta_push"
-// }
-// resource "okta_factor" "oktaOTP" {
-//   provider_id = "okta_otp"
-// }
+resource "okta_factor" "okta_push" {
+  provider_id = "okta_push"
+}
+resource "okta_factor" "okta_otp" {
+  provider_id = "okta_otp"
+}
 // resource "okta_factor" "oktaQuestion" {
 //   provider_id = "okta_question"
 // }
@@ -101,17 +101,15 @@ resource "okta_group_rule" "addingUserRule" {
 // resource "okta_factor" "fidoWEB"{
 //   provider_id = "fido_webauthn"
 // }
-// resource "okta_factor" "google" {
-//   provider_id = "google_otp"
+resource "okta_factor" "google_otp" {
+  provider_id = "google_otp"
+}
+// resource "okta_factor" "rsa_token" {
+//   provider_id = "rsa_token"
 // }
-resource "okta_factor" "rsa" {
-  provider_id = "rsa_token"
-  active = true
-}
-resource "okta_factor" "symantec" {
-  provider_id = "symantec_vip"
-  active = true
-}
+// resource "okta_factor" "symantec_vip" {
+//   provider_id = "symantec_vip"
+// }
 
 resource "okta_policy_mfa" "testmfa" {
   name        = "addingMFAfromTerraform"
@@ -127,6 +125,11 @@ resource "okta_policy_mfa" "testmfa" {
   google_otp = {
     enroll = "OPTIONAL"
   }
+  depends_on = [
+    "okta_factor.okta_otp",
+    "okta_factor.google_otp",
+    "okta_factor.okta_push",
+  ]
 
   groups_included = ["${okta_group.awesomeGroup.id}"]
 }
