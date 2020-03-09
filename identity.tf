@@ -187,7 +187,7 @@ resource "okta_policy_rule_password" "tfpwdpolicyrule" {
 }
 ################################################################################
 
-###################### /////  SIGN ON POLICY \\\\\\ ###########################
+###################### /////  SIGN ON POLICY \\\\\\ ############################
 resource okta_policy_signon mySOpolicy {
   name            = "super sign on policy"
   status          = "ACTIVE"
@@ -204,5 +204,23 @@ resource okta_policy_rule_signon test {
   session_lifetime   = 240
   session_persistent = false
   users_excluded     = ["${okta_user.example[1].id}"]
+}
+################################################################################
+
+###################### /////  TEMPLATE EMAIL \\\\\\ ############################
+resource okta_template_email test {
+  type = "email.forgotPassword"
+
+  translations {
+    language = "en"
+    subject  = "You forgot your password again ?"
+    template = "Hi $${user.firstName},<br/><br/>click here $${resetPasswordLink}"
+  }
+
+  translations {
+    language = "fr"
+    subject  = "Tu as oublié ton mot de passe hein ? "
+    template = "Alors $${user.firstName},<br/><br/>Clique ici $${resetPasswordLink}"
+  }
 }
 ################################################################################
