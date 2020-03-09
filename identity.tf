@@ -80,24 +80,36 @@ resource "okta_group_rule" "addingUserRule" {
 }
 #
 
-// resource "okta_factor" "okta" {
-//   provider = "OKTA"
+// resource "okta_factor" "oktaCall" {
+//   provider_id = "okta_call"
 // }
-// resource "okta_factor" "yubico" {
-//   provider = "YUBICO"
+// resource "okta_factor" "oktaPush" {
+//   provider_id = "okta_push"
 // }
-// resource "okta_factor" "fido" {
-//   provider = "FIDO"
+// resource "okta_factor" "oktaOTP" {
+//   provider_id = "okta_otp"
+// }
+// resource "okta_factor" "oktaQuestion" {
+//   provider_id = "okta_question"
+// }
+// resource "okta_factor" "oktaSMS" {
+//   provider_id = "okta_sms"
+// }
+// resource "okta_factor" "fidoU2F" {
+//   provider_id = "fido_u2f"
+// }
+// resource "okta_factor" "fidoWEB"{
+//   provider_id = "fido_webauthn"
 // }
 // resource "okta_factor" "google" {
-//   provider = "GOOGLE"
+//   provider_id = "google_otp"
 // }
 resource "okta_factor" "rsa" {
-  provider_id = "okta.RsaTokenFactor"
+  provider_id = "rsa_token"
   active = true
 }
 resource "okta_factor" "symantec" {
-  provider_id = "okta.SymantecVipFactor"
+  provider_id = "symantec_vip"
   active = true
 }
 
