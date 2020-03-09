@@ -111,6 +111,9 @@ resource "okta_factor" "google_otp" {
 //   provider_id = "symantec_vip"
 // }
 
+/*  Some providers of factors may require to be manually activated from okta
+(those needing extra parameters to be activatedd) */
+
 resource "okta_policy_mfa" "testmfa" {
   name        = "addingMFAfromTerraform"
   status      = "ACTIVE"
@@ -140,4 +143,32 @@ resource "okta_policy_rule_mfa" "mfarulepolicy"{
   status = "ACTIVE" //or "INACTIVE".
   enroll = "LOGIN" //It can be "CHALLENGE", "LOGIN", or "NEVER".
   network_connection = "ANYWHERE" // "ZONE", "ON_NETWORK", or "OFF_NETWORK".
+}
+
+resource "okta_policy_password" "tfpwdpolicy" {
+  name                   = "tfpwdpolicy"
+  status                 = "ACTIVE"
+  description            = "waow this is the worst policy ever !"
+  groups_included = ["${okta_group.awesomeGroup.id}"]
+  password_min_length = 2 //default is 8
+  password_min_lowercase = 1 //min nbr of lowercase
+  password_min_uppercase = 0
+  password_min_number = 0 //nbr of 'numbers'
+  password_min_symbol = 0
+  password_exclude_username = false
+  password_exclude_first_name = false
+  password_exclude_last_name = false
+  password_dictionary_lookup = false //check pwd against common pwd dictionnary
+  password_max_age_days = 0 // 0 = no limit
+  password_expire_warn_days = 0 // 0 = no warning.
+  password_min_age_minutes = 0 // 0 = no limit.
+  password_history_count = 0 // 0 = none.
+  password_max_lockout_attempts = 0 // 0 = no limit.
+  password_auto_unlock_minutes = 0 //0 = no limit.
+  password_show_lockout_failures = false
+  question_min_length = 0
+  email_recovery = "INACTIVE"
+  recovery_email_token = 3600 // Lifetime in minutes of the recovery email token.
+  sms_recovery = "INACTIVE"
+  question_recovery = "INACTIVE"
 }
