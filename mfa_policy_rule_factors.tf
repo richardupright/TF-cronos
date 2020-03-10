@@ -31,7 +31,7 @@ resource "okta_factor" "symantec_vip" {
   provider_id = "symantec_vip"
 }
 resource okta_factor yubikey_token{
-  provider_id = yubikey_token
+  provider_id = "yubikey_token"
 }
 //  Some providers may require to be manually activated from okta
 // (those needing extra parameters to be activatedd, like rsa)
