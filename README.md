@@ -97,3 +97,7 @@
       * https://atom.io/packages/language-hcl
       * https://atom.io/packages/atom-beautify
     * Configure github with SSH : https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh
+6. Links to documentation
+		* https://www.terraform.io/docs/providers/okta/index.html
+		* https://github.com/articulate/terraform-provider-okta/tree/master/examples
+		* https://github.com/articulate/terraform-provider-okta/tree/master/okta

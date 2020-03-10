@@ -9,32 +9,33 @@ resource "okta_factor" "okta_push" {
   provider_id = "okta_push"
   depends_on  = [okta_factor.okta_otp ]
 }
-resource "okta_factor" "okta_call" {
-  provider_id = "okta_call"
-}
-resource "okta_factor" "okta_question" {
-  provider_id = "okta_question"
-}
-resource "okta_factor" "okta_sms" {
-  provider_id = "okta_sms"
-}
-resource "okta_factor" "fido_u2f" {
-  provider_id = "fido_u2f"
-}
-resource "okta_factor" "fido_webauthn"{
-  provider_id = "fido_webauthn"
-}
-resource "okta_factor" "rsa_token" {
-  provider_id = "rsa_token"
-}
-resource "okta_factor" "symantec_vip" {
-  provider_id = "symantec_vip"
-}
-resource okta_factor yubikey_token{
-  provider_id = "yubikey_token"
-}
+// resource "okta_factor" "okta_call" {
+//   provider_id = "okta_call"
+// }
+// resource "okta_factor" "okta_question" {
+//   provider_id = "okta_question"
+// }
+// resource "okta_factor" "okta_sms" {
+//   provider_id = "okta_sms"
+// }
+// resource "okta_factor" "fido_u2f" {
+//   provider_id = "fido_u2f"
+// }
+// resource "okta_factor" "fido_webauthn"{
+//   provider_id = "fido_webauthn"
+// }
+// resource "okta_factor" "rsa_token" {
+//   provider_id = "rsa_token"
+// }
+// resource "okta_factor" "symantec_vip" {
+//   provider_id = "symantec_vip"
+// }
+// resource okta_factor yubikey_token{
+//   provider_id = "yubikey_token"
+// }
 //  Some providers may require to be manually activated from okta
-// (those needing extra parameters to be activatedd, like rsa)
+// rsa and symantec : unsported operation ?
+// fido_u2f, fido_webauthn, yubikey_token : need to be enabled by okta support
 ################################################################################
 
 ###################### /////  MFA POLICY \\\\\\ ################################
