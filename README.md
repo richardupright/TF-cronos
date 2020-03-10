@@ -5,18 +5,19 @@
 
 
 1. Install terraform (guide : https://learn.hashicorp.com/terraform/getting-started/install.html)
-	1.1 - download the zip, extract the terraform.exe into C:/Program Files/Terraform (only file needed)
-	1.2 - configure the path (environnement variables > system var > path > add the path to exe file)
+	1.1 download the zip, extract the terraform.exe into C:/Program Files/Terraform (only file needed)
+	1.2 configure the path (environnement variables > system var > path > add the path to exe file)
 2. Terraform Enterprise: Test connection with the okta tenant
-	2.1 - mkdir okta-user-schema
-	2.2 - cd okta-user-schema
-	2.3 - terraform init (does nothing if the rep is empty)
-	2.4 - create file "okta.auto.tfvars"
+	2.1 mkdir okta-user-schema
+	2.2 cd okta-user-schema
+	2.3 terraform init (does nothing if the rep is empty)
+	2.4 create file "okta.auto.tfvars"
 		org_name  = "dev-1234"
 		base_url  = "okta.com"
 		api_token = "<your-api-token>"
 			token : To generate a new Okta API token, log into your Okta administrator console as a superuser and select API -> Tokens from the navigation menu. Next, click the Create Token button and give your token a name, then click Ok and copy the newly generated token into the configuration file above.
-	2.5 - create file "identity.tf"
+	2.5 create file "identity.tf"
+  '
 		variable "org_name" {}
 		variable "api_token" {}
 		variable "base_url" {}
@@ -32,10 +33,11 @@
 			type   = "string"
 			master = "PROFILE_MASTER"
 		}
-	2.6 - terraform init
-	2.7 - terraform plan
-	2.8 - terraform apply
-  2.9 - You should see the result in your okta tenant (a custom attributes is added to the profile of okta)
+  '
+	2.6 terraform init
+	2.7 terraform plan
+	2.8 terraform apply
+  2.9 You should see the result in your okta tenant (a custom attributes is added to the profile of okta)
 3. Terraform cloud : https://app.terraform.io/signup/account to create an account
 	3.1 - create workspace (tf-cronos-prod)
 	3.2 - adding github as vcs https://www.terraform.io/docs/cloud/vcs/github.html
