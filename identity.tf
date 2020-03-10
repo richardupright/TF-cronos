@@ -38,6 +38,17 @@ resource "okta_user_schema" "crn_extension" {
 }
 ################################################################################
 
+###################### /////  USER BASE SCHEMA \\\\\\ ##########################
+resource "okta_user_base_schema" "firstName" {
+  index       = "firstName"
+  title       = "First name"
+  type        = "string"
+  master      = "PROFILE_MASTER"
+  permissions = "READ_WRITE"
+  required    = true
+}
+################################################################################
+
 ###################### /////  ADDING USER \\\\\\ ###############################
 resource "okta_user" "example" {
   count 	    = 4 //creates four new users (0,1,2,3)
@@ -238,7 +249,7 @@ resource "okta_app_oauth" "f1" {
 }
 ################################################################################
 
-  ###################### /////  NETWORK ZONE \\\\\\ ############################
+###################### /////  NETWORK ZONE \\\\\\ ##############################
 resource "okta_network_zone" "myZone" {
   name     = "Area 51"
   type     = "IP"
@@ -246,6 +257,7 @@ resource "okta_network_zone" "myZone" {
   //proxies  = ["2.2.3.4/24", "3.3.4.5-3.3.4.15"]
 }
 //Dynamic zone require : Geolocation for Network Zones or IP Trust for Network Zones to be enabled
+// this is an EA feature, need to go through okta support (open a case)
 // resource "okta_network_zone" "dynamic_network_zone_example" {
 //   name              = "Dynamic zone for US and BE"
 //   type              = "DYNAMIC"
