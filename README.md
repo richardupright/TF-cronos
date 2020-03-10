@@ -91,8 +91,9 @@
 		* on git, open a pull request
 		* base master <- compare dev
 5. Configure Atom for easier use of github
-  * Download here : https://atom.io/
-  * plugins to install :
-    * https://atom.io/packages/git-plus
-    * https://atom.io/packages/language-hcl
-    * https://atom.io/packages/atom-beautify 
+    * Download here : https://atom.io/
+    * plugins to install :
+      * https://atom.io/packages/git-plus
+      * https://atom.io/packages/language-hcl
+      * https://atom.io/packages/atom-beautify
+    * Configure github with SSH : https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh
