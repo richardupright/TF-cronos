@@ -15,9 +15,7 @@ resource "okta_group_roles" "awesomeGroupRoles" {
   admin_roles = ["SUPER_ADMIN"]
 }
 ################################################################################
-variable enable_group_rule {
-    default     = true
-}
+
 ###################### /////  GROUP RULES \\\\\\ ###############################
 //group membership rules cannot be created for groups with administrators roles
 resource "okta_group_rule" "addingUserRule" {

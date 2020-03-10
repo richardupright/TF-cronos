@@ -5,6 +5,6 @@ variable "base_url" {}
 variable domain {
     default     = "example.com"
 }
-// variable enable_group_rule {
-//     default     = true
-// }
+variable enable_group_rule {
+    default     = true
+}
