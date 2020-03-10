@@ -19,7 +19,7 @@ resource "okta_group_rule" "addingUserRule" {
   count             = var.enable_group_rule ? 1 : 0 // Do not create if group rule feature is not available
   name              = "addRichard"
   status            = "ACTIVE"
-  group_assignments = [okta_group.awesomeGroup.id]
+  group_assignments = ["${okta_group.awesomeGroup.id}"]
   expression_type   = "urn:okta:expression:1.0"
   expression_value  = "String.startsWith(user.firstName,\"Richard\")"
 //expression_value  = "String.substringAfter(user.login, \"@\") == \"${var.domain}\""

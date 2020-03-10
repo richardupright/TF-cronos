@@ -2,11 +2,12 @@
 resource "okta_factor" "google_otp" {
   provider_id = "google_otp"
 }
-resource "okta_factor" "okta_push" {
-  provider_id = "okta_push"
-}
 resource "okta_factor" "okta_otp" {
   provider_id = "okta_otp"
+}
+resource "okta_factor" "okta_push" {
+  provider_id = "okta_push"
+  depends_on  = [okta_factor.okta_otp ]
 }
 // resource "okta_factor" "okta_call" {
 //   provider_id = "okta_call"
