@@ -264,3 +264,13 @@ resource "okta_network_zone" "myZone" {
 //   dynamic_locations = ["US", "BE"]
 // }
 ################################################################################
+
+###################### /////  AUTH SERVER \\\\\\ ###############################
+resource "okta_auth_server" "myServer" {
+  audiences   = ["api://default"]
+  description = "A perfect custom authorization server"
+  name        = "custom"
+  issuer_mode = "CUSTOM_URL"
+  status      = "ACTIVE"
+}
+################################################################################
