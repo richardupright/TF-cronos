@@ -15,6 +15,7 @@ resource okta_auth_server_claim test {
   value_type     = "EXPRESSION"
   value          = "cool_updated"
   auth_server_id = okta_auth_server.myServer.id
+  //scopes = [] list of scopes the claim is tied to
 }
 
 resource "okta_auth_server_policy" "test" {
