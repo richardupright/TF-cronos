@@ -73,7 +73,7 @@
 		* git add identity.tf
 		* git commit -m ""
 		* git push
-			use git tortoise for windows to use a graphic interface
+		*	use git tortoise for windows to use a graphic interface
 	* Now that you’ve configured your workspace, select Queue plan from the top right, enter a reason, and then press Queue plan.		
 4. using terraform for two environnements
 	* create a branch (dev) on the github repo
@@ -90,3 +90,9 @@
 	* applying changes to the prod environnement
 		* on git, open a pull request
 		* base master <- compare dev
+5. Configure Atom for easier use of github
+  * Download here : https://atom.io/
+  * plugins to install :
+    * https://atom.io/packages/git-plus
+    * https://atom.io/packages/language-hcl
+    * https://atom.io/packages/atom-beautify 
