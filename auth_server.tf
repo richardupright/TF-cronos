@@ -1,15 +1,15 @@
 ###################### /////  AUTH SERVER \\\\\\ ###############################
-resource "okta_auth_server" "myServer" {
+resource okta_auth_server myServer {
   audiences   = ["api://default"]
   description = "A perfect custom authorization server"
   name        = "custom"
   issuer_mode = "ORG_URL" //custom_url require the definition of a custom domain
   status      = "ACTIVE"
-//audiences =
+  //audiences = ...
 }
 
-resource "okta_auth_server_claim" "test" {
-  name           = "claims for my auth server"
+resource okta_auth_server_claim test {
+  name           = "claimssss"
   status         = "ACTIVE"
   claim_type     = "RESOURCE"
   value_type     = "EXPRESSION"
@@ -19,7 +19,7 @@ resource "okta_auth_server_claim" "test" {
 
 resource "okta_auth_server_policy" "test" {
   status           = "ACTIVE"
-  name             = "policy for my auth server"
+  name             = "policyformyauthserver"
   description      = "test "
   priority         = 1
   client_whitelist = ["ALL_CLIENTS"]
@@ -37,7 +37,7 @@ resource "okta_auth_server_policy_rule" "test" {
 resource "okta_auth_server_scope" "test" {
   consent        = "REQUIRED"
   description    = "test_updated"
-  name           = "test:something"
+  name           = "testsomething"
   auth_server_id = "${okta_auth_server.myServer.id}"
 }
 ################################################################################
