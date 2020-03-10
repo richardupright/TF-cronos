@@ -80,7 +80,7 @@ resource "okta_group" "awesomeGroup" {
 ###################### /////  GROUP RULES \\\\\\ ###############################
 //group membership rules cannot be created for groups with administrators roles
 resource "okta_group_rule" "addingUserRule" {
-  count             = "${var.enable_group_rule ? 1 : 0}" // Do not create if group rule feature is not available
+  count             = var.enable_group_rule ? 1 : 0 // Do not create if group rule feature is not available
   name              = "addRichard"
   status            = "ACTIVE"
   group_assignments = ["${okta_group.awesomeGroup.id}"]
