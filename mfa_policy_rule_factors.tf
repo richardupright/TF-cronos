@@ -8,7 +8,7 @@ resource okta_factor okta_otp {
 }
 resource okta_factor okta_push {
   provider_id = "okta_push"
-  depends_on  = ["${okta_factor.okta_otp}" ]
+  depends_on  = [okta_factor.okta_otp ]
 }
 // resource okta_factor okta_call {
 //   provider_id = "okta_call"
@@ -56,9 +56,9 @@ resource okta_policy_mfa testmfa {
     enroll    = "OPTIONAL"
   }
   depends_on  = [
-    "${okta_factor.okta_otp}",
-    "${okta_factor.google_otp}",
-    "${okta_factor.okta_push}",
+    okta_factor.okta_otp,
+    okta_factor.google_otp,
+    okta_factor.okta_push,
   ]
 
   groups_included = ["${okta_group.awesomeGroup.id}"]
