@@ -13,9 +13,8 @@ resource okta_policy_rule_signon test {
   policyid            = okta_policy_signon.mySOpolicy.id
   name                = "super sign on rule"
   status              = "INACTIVE"
-  access              = "ALLOW"
-  session_idle        = 240
-  session_lifetime    = 240
+  session_idle        = 240 //maxx minutes a session can be idle.
+  session_lifetime    = 240 //Max minutes a session is active: Disable = 0.
   session_persistent  = false
   users_excluded      = ["${okta_user.example[1].id}"]
   authtype            = "ANY" //or "RADIUS"
@@ -24,8 +23,6 @@ resource okta_policy_rule_signon test {
   //mfa_prompt        = "ALWAYS", "DEVICE" or "SESSION"
   mfa_remember_device = false //default is false
   mfa_lifetime        = 5
-  session_idle        = 5 //maxx minutes a session can be idle.
-  session_lifetime    = 0 //Max minutes a session is active: Disable = 0.
   network_connection  = "ANYWHERE" //"ZONE", "ON_NETWORK", or "OFF_NETWORK".
 
 }
