@@ -7,5 +7,5 @@ provider "okta" {
 //three variables from our okta.auto.tfvars file to configure it.
 
 data okta_group all {
-  name       = "Everyone"
+  name  = "Everyone"
 }

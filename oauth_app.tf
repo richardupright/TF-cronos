@@ -12,25 +12,25 @@ resource "okta_app_oauth" "f1" {
   //tos_uri, logo_uri, policy_uri to specify URI for the client
 }
 
-// //https://www.terraform.io/docs/providers/okta/d/user.html
+//https://www.terraform.io/docs/providers/okta/d/user.html
+data "okta_user" "richard" {
+  search {
+    name  = "profile.firstName"
+    value = "Richard"
+  }
+  search {
+    name  = "profile.lastName"
+    value = "Dedecker"
+  }
+}
 // data "okta_user" "richard" {
-//   search {
-//     name  = "profile.firstName"
-//     value = "Richard"
-//   }
-//   search {
-//     name  = "profile.lastName"
-//     value = "Dedecker"
-//   }
+//   user_id = "00u304rjw6FmijP884x6"
 // }
-// // data "okta_user" "richard" {
-// //   user_id = "00u304rjw6FmijP884x6"
-// // }
-//
-// //https://www.terraform.io/docs/providers/okta/r/app_user.html
-// resource "okta_app_user" "example" {
-//   app_id   = okta_app_oauth.f1.id
-//   user_id  = data.okta_user.richard.id
-//   username = data.okta_user.richard.email
-// }
+
+//https://www.terraform.io/docs/providers/okta/r/app_user.html
+resource "okta_app_user" "example" {
+  app_id   = "${okta_app_oauth.f1.id}"
+  user_id  = "${data.okta_user.richard.id}"
+  username = "${data.okta_user.richard.email}"
+}
 ################################################################################

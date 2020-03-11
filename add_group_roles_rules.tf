@@ -4,7 +4,7 @@ resource "okta_group" "awesomeGroup" {
   name        = "awesome"
   description = "My Awesome Group"
 }
-resource okta_group uselessGroup {
+resource "okta_group" "uselessGroup" {
   name        = "useless"
   description = "Group for admin"
 }
