@@ -2,7 +2,6 @@
 //https://www.terraform.io/docs/providers/okta/r/group.html
 resource okta_group awesomeGroup {
   name        = "awesome"
-  status      = "ACTIVE"
   description = "My Awesome Group"
 }
 resource okta_group uselessGroup {
