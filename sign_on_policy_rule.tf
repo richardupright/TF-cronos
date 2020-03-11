@@ -1,6 +1,6 @@
 ###################### /////  SIGN ON POLICY \\\\\\ ############################
 //https://www.terraform.io/docs/providers/okta/r/policy_signon.html
-resource okta_policy_signon mySOpolicy {
+resource "okta_policy_signon" "mySOpolicy" {
   name            = "super sign on policy"
   status          = "ACTIVE"
   description     = "description of my policy"
@@ -8,7 +8,7 @@ resource okta_policy_signon mySOpolicy {
 }
 
 //https://www.terraform.io/docs/providers/okta/r/policy_rule_signon.html
-resource okta_policy_rule_signon test {
+resource "okta_policy_rule_signon" "test" {
   priority            = 1
   policyid            = okta_policy_signon.mySOpolicy.id
   name                = "super sign on rule"

@@ -1,6 +1,6 @@
 ###################### /////  ADD OAUTH APP \\\\\\ #############################
 //https://www.terraform.io/docs/providers/okta/r/app_oauth.html
-resource okta_app_oauth f1 {
+resource "okta_app_oauth" "f1" {
   label                      = "F1DEMO"
   type                       = "native" //web
   grant_types                = ["authorization_code", "refresh_token", "implicit"]
@@ -13,7 +13,7 @@ resource okta_app_oauth f1 {
 }
 
 //https://www.terraform.io/docs/providers/okta/d/user.html
-data okta_user richard {
+data "okta_user" "richard" {
   search {
     name  = "profile.firstName"
     value = "Richard"
@@ -23,12 +23,12 @@ data okta_user richard {
     value = "Dedecker"
   }
 }
-// data okta_user richard {
+// data "okta_user" "richard" {
 //   user_id = "00u304rjw6FmijP884x6"
 // }
 
 //https://www.terraform.io/docs/providers/okta/r/app_user.html
-resource okta_app_user example {
+resource "okta_app_user" "example" {
   app_id   = okta_app_oauth.f1.id
   user_id  = data.okta_user.richard.id
   username = data.okta_user.richard.email

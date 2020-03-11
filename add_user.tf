@@ -1,6 +1,6 @@
 ###################### /////  ADDING USER \\\\\\ ###############################
 //https://www.terraform.io/docs/providers/okta/r/user.html
-resource okta_user example {
+resource "okta_user" "example" {
   count 	    = 4 //creates four new users (0,1,2,3)
   email 	    = "TerraformUser${count.index}@terraform.be"
   login 	    = "TerraformUser${count.index}@terraform.be"

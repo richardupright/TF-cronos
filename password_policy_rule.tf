@@ -1,6 +1,6 @@
 ###################### /////  PASSWORD POLICY \\\\\\ ###########################
 //https://www.terraform.io/docs/providers/okta/r/policy_password.html
-resource okta_policy_password tfpwdpolicy {
+resource "okta_policy_password" "tfpwdpolicy" {
   name                            = "tfpwdpolicy"
   status                          = "ACTIVE"
   description                     = "waow this is the worst policy ever !"
@@ -29,7 +29,7 @@ resource okta_policy_password tfpwdpolicy {
 }
 
 //https://www.terraform.io/docs/providers/okta/r/policy_rule_password.html
-resource okta_policy_rule_password tfpwdpolicyrule {
+resource "okta_policy_rule_password" "tfpwdpolicyrule" {
   policyid            = okta_policy_password.tfpwdpolicy.id
   name                = "great rule"
   status              = "ACTIVE"
