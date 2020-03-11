@@ -1,6 +1,6 @@
 ###################### /////  AUTH SERVER \\\\\\ ###############################
 //https://www.terraform.io/docs/providers/okta/r/auth_server.html
-resource okta_auth_server myServer {
+resource "okta_auth_server" "myServer" {
   audiences   = ["api://default"]
   description = "A perfect custom authorization server"
   name        = "custom"
@@ -10,7 +10,7 @@ resource okta_auth_server myServer {
 }
 
 //https://www.terraform.io/docs/providers/okta/r/auth_server_scope.html
-resource okta_auth_server_scope test {
+resource "okta_auth_server_scope" "test" {
   consent        = "REQUIRED" //indicates wether a consent dialog is needed for the scope (other value is IMPLICIT)
   description    = "test_updated"
   name           = "testsomething"
@@ -18,7 +18,7 @@ resource okta_auth_server_scope test {
 }
 
 //https://www.terraform.io/docs/providers/okta/r/auth_server_claim.html
-resource okta_auth_server_claim test {
+resource "okta_auth_server_claim" "test" {
   name           = "claimssss"
   status         = "ACTIVE"
   claim_type     = "RESOURCE" //for access token, or IDENTITY for id token
@@ -30,7 +30,7 @@ resource okta_auth_server_claim test {
 }
 
 //https://www.terraform.io/docs/providers/okta/r/auth_server_policy.html
-resource okta_auth_server_policy test {
+resource "okta_auth_server_policy" "test" {
   status           = "ACTIVE"
   name             = "policyformyauthserver"
   description      = "test "
@@ -40,7 +40,7 @@ resource okta_auth_server_policy test {
 }
 
 //https://www.terraform.io/docs/providers/okta/r/auth_server_policy_rule.html
-resource okta_auth_server_policy_rule test {
+resource "okta_auth_server_policy_rule" "test" {
   auth_server_id       = okta_auth_server.myServer.id
   policy_id            = okta_auth_server_policy.test.id
   status               = "ACTIVE"
