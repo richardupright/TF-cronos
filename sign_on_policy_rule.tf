@@ -17,13 +17,13 @@ resource "okta_policy_rule_signon" "test" {
   session_lifetime    = 240 //Max minutes a session is active: Disable = 0.
   session_persistent  = false
   users_excluded      = [okta_user.example[1].id]
-  authtype            = "ANY" //or "RADIUS"
+  //authtype            = "ANY" //or "RADIUS"
   access              = "ALLOW" //allow or deny based on the rule conditions
-  mfa_required        = false //default is false
+  //mfa_required        = false //default is false
   //mfa_prompt        = "ALWAYS", "DEVICE" or "SESSION"
-  mfa_remember_device = false //default is false
-  mfa_lifetime        = 5
-  network_connection  = "ANYWHERE" //"ZONE", "ON_NETWORK", or "OFF_NETWORK".
+  //mfa_remember_device = false //default is false
+  //mfa_lifetime        = 5
+  //network_connection  = "ANYWHERE" //"ZONE", "ON_NETWORK", or "OFF_NETWORK".
 
 }
 ################################################################################
