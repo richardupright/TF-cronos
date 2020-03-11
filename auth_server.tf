@@ -14,7 +14,7 @@ resource okta_auth_server_scope test {
   consent        = "REQUIRED" //indicates wether a consent dialog is needed for the scope (other value is IMPLICIT)
   description    = "test_updated"
   name           = "testsomething"
-  auth_server_id = "${okta_auth_server.myServer.id}"
+  auth_server_id = okta_auth_server.myServer.id
 }
 
 //https://www.terraform.io/docs/providers/okta/r/auth_server_claim.html
@@ -50,6 +50,6 @@ resource okta_auth_server_policy_rule test {
   grant_type_whitelist = ["password"] //accepted grant types : "authorization_code", "implicit"
   access_token_lifetime_minutes = 5 //values between 5 - 1440
   refresh_token_lifetime_minutes = 5
-  refresh_token_windows_minutes = 10 //window in which a refresh token can be used, values between 10 - 2628000 (5years)
+  refresh_token_window_minutes = 10 //window in which a refresh token can be used, values between 10 - 2628000 (5years)
 }
 ################################################################################

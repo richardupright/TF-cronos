@@ -18,7 +18,6 @@ data okta_user richard {
     name  = "profile.firstName"
     value = "Richard"
   }
-
   search {
     name  = "profile.lastName"
     value = "Dedecker"
@@ -26,10 +25,9 @@ data okta_user richard {
 }
 
 //https://www.terraform.io/docs/providers/okta/r/app_user.html
-resource "okta_app_user" "example" {
+resource okta_app_user example {
   app_id   = okta_app_oauth.f1.id
-  user_id  = okta_user.richard.id
-  username = okta_user.richard.email
+  user_id  = data.okta_user.richard.id
+  username = data.okta_user.richard.email
 }
-
 ################################################################################
