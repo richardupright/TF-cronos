@@ -28,9 +28,9 @@ data okta_user richard {
 }
 
 //https://www.terraform.io/docs/providers/okta/r/app_user.html
-resource okta_app_user example {
-  app_id   = okta_app_oauth.f1.id
-  user_id  = data.okta_user.richard.id
-  username = data.okta_user.richard.email
-}
+// resource okta_app_user example {
+//   app_id   = okta_app_oauth.f1.id
+//   user_id  = data.okta_user.richard.id
+//   username = data.okta_user.richard.email
+// }
 ################################################################################
