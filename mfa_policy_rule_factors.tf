@@ -61,7 +61,7 @@ resource "okta_policy_mfa" "testmfa" {
     okta_factor.okta_push,
   ]
 
-  groups_included = ["${okta_group.awesomeGroup.id}"]
+  groups_included = [okta_group.awesomeGroup.id]
 }
 
 resource "okta_policy_rule_mfa" "mfarulepolicy"{

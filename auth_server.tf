@@ -45,7 +45,7 @@ resource "okta_auth_server_policy_rule" "test" {
   status               = "ACTIVE"
   name                 = "testing"
   priority             = 1
-  group_whitelist      = ["${data.okta_group.all.id}"]
+  group_whitelist      = [data.okta_group.all.id]
   grant_type_whitelist = ["password"] //accepted grant types : "authorization_code", "implicit"
   access_token_lifetime_minutes = 5 //values between 5 - 1440
   refresh_token_lifetime_minutes = 15

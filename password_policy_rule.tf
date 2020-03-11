@@ -4,7 +4,7 @@ resource "okta_policy_password" "tfpwdpolicy" {
   name                            = "tfpwdpolicy"
   status                          = "ACTIVE"
   description                     = "waow this is the worst policy ever !"
-  groups_included                 = ["${okta_group.awesomeGroup.id}"]
+  groups_included                 = [okta_group.awesomeGroup.id]
   password_min_length             = 4 //default is 8, min 4
   password_min_lowercase          = 1 //min nbr of lowercase
   password_min_uppercase          = 0
