@@ -49,7 +49,7 @@ resource okta_auth_server_policy_rule test {
   group_whitelist      = ["${data.okta_group.all.id}"]
   grant_type_whitelist = ["password"] //accepted grant types : "authorization_code", "implicit"
   access_token_lifetime_minutes = 5 //values between 5 - 1440
-  refresh_token_lifetime_minutes = 5
-  refresh_token_window_minutes = 10 //window in which a refresh token can be used, values between 10 - 2628000 (5years)
+  refresh_token_lifetime_minutes = 15
+  refresh_token_window_minutes = 10 //window in which a refresh token can be used,  must be between accessTokenLifetimeMinutes-refreshTokenLifetimeMinutes, values between 10 - 2628000 (5years)
 }
 ################################################################################
