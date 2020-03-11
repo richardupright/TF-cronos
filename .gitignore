@@ -1,1 +1,3 @@
+//add this if you use Terraform Enterprise and you use a file storing
+//the api token in plain text (you don't want to give out that info publicly)
 *.tfvars

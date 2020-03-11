@@ -1,33 +1,34 @@
 ###################### /////  ENABLE FACTORS \\\\\\ ############################
-resource "okta_factor" "google_otp" {
+//https://www.terraform.io/docs/providers/okta/r/factor.html
+resource okta_factor google_otp {
   provider_id = "google_otp"
 }
-resource "okta_factor" "okta_otp" {
+resource okta_factor okta_otp {
   provider_id = "okta_otp"
 }
-resource "okta_factor" "okta_push" {
+resource okta_factor okta_push {
   provider_id = "okta_push"
   depends_on  = [okta_factor.okta_otp ]
 }
-// resource "okta_factor" "okta_call" {
+// resource okta_factor okta_call {
 //   provider_id = "okta_call"
 // }
-// resource "okta_factor" "okta_question" {
+// resource okta_factor okta_question {
 //   provider_id = "okta_question"
 // }
-// resource "okta_factor" "okta_sms" {
+// resource okta_factor okta_sms {
 //   provider_id = "okta_sms"
 // }
-// resource "okta_factor" "fido_u2f" {
+// resource okta_factor fido_u2f {
 //   provider_id = "fido_u2f"
 // }
-// resource "okta_factor" "fido_webauthn"{
+// resource okta_factor fido_webauthn{
 //   provider_id = "fido_webauthn"
 // }
-// resource "okta_factor" "rsa_token" {
+// resource okta_factor rsa_token {
 //   provider_id = "rsa_token"
 // }
-// resource "okta_factor" "symantec_vip" {
+// resource okta_factor symantec_vip {
 //   provider_id = "symantec_vip"
 // }
 // resource okta_factor yubikey_token{
@@ -39,7 +40,8 @@ resource "okta_factor" "okta_push" {
 ################################################################################
 
 ###################### /////  MFA POLICY \\\\\\ ################################
-resource "okta_policy_mfa" "testmfa" {
+//https://www.terraform.io/docs/providers/okta/r/policy_mfa.html
+resource okta_policy_mfa testmfa {
   name        = "addingMFAfromTerraform"
   status      = "ACTIVE"
   description = "my awesome mfa polciy"
@@ -62,7 +64,7 @@ resource "okta_policy_mfa" "testmfa" {
   groups_included = ["${okta_group.awesomeGroup.id}"]
 }
 
-resource "okta_policy_rule_mfa" "mfarulepolicy"{
+resource okta_policy_rule_mfa mfarulepolicy{
   policyid           = okta_policy_mfa.testmfa.id
   name               = "rule for mfa policy"
   status             = "ACTIVE" //or "INACTIVE".
