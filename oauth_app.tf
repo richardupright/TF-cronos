@@ -23,9 +23,9 @@ resource okta_app_oauth f1 {
 //     value = "Dedecker"
 //   }
 // }
-data okta_user richard {
-  user_id = "00u304rjw6FmijP884x6"
-}
+// data okta_user richard {
+//   user_id = "00u304rjw6FmijP884x6"
+// }
 
 //https://www.terraform.io/docs/providers/okta/r/app_user.html
 // resource okta_app_user example {
