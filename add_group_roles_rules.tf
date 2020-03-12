@@ -23,9 +23,9 @@ resource "okta_group_roles" "awesomeGroupRoles" {
 ###################### /////  GROUP RULES \\\\\\ ###############################
 //https://www.terraform.io/docs/providers/okta/r/group_rule.html
 //group membership rules cannot be created for groups with administrators roles
-resource "okta_group_rule" "addingUserRule" {
+resource "okta_group_rule" "addRichardintoAwesomeGroup" {
   count             = var.enable_group_rule ? 1 : 0 // Do not create if group rule feature is not available
-  name              = "addRichard"
+  name              = "addRichardintoAwesomeGroup"
   status            = "ACTIVE"
   group_assignments = [okta_group.awesomeGroup.id]
   expression_type   = "urn:okta:expression:1.0" //expression type to use to invoke the rule
