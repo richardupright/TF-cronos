@@ -122,15 +122,15 @@ Configure Atom for easier use of github
   * Configure github with SSH : https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh
 
 ## Links to documentation
-	Useful documentation :
-	* [Terraform docs](https://www.terraform.io/docs/providers/okta/index.html)
-	* [Terraform examples](https://github.com/articulate/terraform-provider-okta/tree/master/examples)
-	* [Source code of the Okta API](https://github.com/articulate/terraform-provider-okta/tree/master/okta)
+Useful documentation :
+* [Terraform docs](https://www.terraform.io/docs/providers/okta/index.html)
+* [Terraform examples](https://github.com/articulate/terraform-provider-okta/tree/master/examples)
+* [Source code of the Okta API](https://github.com/articulate/terraform-provider-okta/tree/master/okta)
 
 ## Limitations of the Okta provider
-	This is a list of options the Okta provider does not offer yet (as of march 2020)
-	* Customization Settings, exept template email
-	* User Mappings
-	* API	integrations on preconfigured applications, such as AWS SAML App.
-	* SAML Roles on AWS SAML App
-	* Hooking up inline token hooks (they can be created and managed but not flipped on)
+This is a list of options the Okta provider does not offer yet (as of march 2020)
+* Customization Settings, exept template email
+* User Mappings
+* API	integrations on preconfigured applications, such as AWS SAML App.
+* SAML Roles on AWS SAML App
+* Hooking up inline token hooks (they can be created and managed but not flipped on)
