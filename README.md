@@ -8,6 +8,7 @@ Terraform is an orchestration tool that uses declarative code to build, change a
 Terraform comes in 2 solutions : on-prem or cloud.
 * on-prem is free, no restriction.
 * cloud is free with a limit of 5 users in the team.\
+
 You can also have Terraform Enterpise, which is the cloud solution without restrictions but isn't free.
 
 ## Terraform on-prem (CLI)
@@ -121,15 +122,13 @@ Configure Atom for easier use of github
   * Configure github with SSH : https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh
 
 ## Links to documentation
-
-Useful documentation :\
+	Useful documentation :
 	* [Terraform docs](https://www.terraform.io/docs/providers/okta/index.html)
 	* [Terraform examples](https://github.com/articulate/terraform-provider-okta/tree/master/examples)
 	* [Source code of the Okta API](https://github.com/articulate/terraform-provider-okta/tree/master/okta)
 
 ## Limitations of the Okta provider
-
-This is a list of options the Okta provider does not offer yet (as of march 2020)\
+	This is a list of options the Okta provider does not offer yet (as of march 2020)
 	* Customization Settings, exept template email
 	* User Mappings
 	* API	integrations on preconfigured applications, such as AWS SAML App.
