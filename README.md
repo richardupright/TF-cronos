@@ -6,8 +6,8 @@
 Terraform is an orchestration tool that uses declarative code to build, change and version infrastructure that is made up of server instances and services. You can use Okta's official Terraform provider to interact with Okta services. Existing Okta infrastructure can be imported and brought under Terraform management.
 
 Terraform comes in 2 solutions : on-prem or cloud.
-* on-prem is free, no restriction
-* cloud is free with a limit of 5 users in the team
+* on-prem is free, no restriction.
+* cloud is free with a limit of 5 users in the team.
 You can also have Terraform Enterpise, which is the cloud solution without restrictions but isn't free.
 
 ## Terraform on-prem (CLI)
