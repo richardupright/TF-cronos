@@ -9,12 +9,12 @@ Terraform comes in 2 solutions : on-prem or cloud.
 * on-prem is free, no restriction.
 * cloud is free with a limit of 5 users in the team.\
 
-You can also have Terraform Enterpise, which is the cloud solution without restrictions but isn't free.
+You can also have Terraform Enterprise, which is the cloud solution without restrictions but isn't free.
 
 ## Terraform on-prem (CLI)
 1. Install terraform (guide : https://learn.hashicorp.com/terraform/getting-started/install.html)
 	*  download the zip, extract the *terraform.ex*e into *C:/Program Files/Terraform* (only file needed)
-	*  configure the path (environnement variables > system var > path > add the path to exe file)
+	*  configure the path (environment variables > system var > path > add the path to exe file)
 2. Test connection with Okta
 Create a directory, and in there create a file that Terraform will use later to apply configuration to Okta.
 	*  mkdir okta-user-schema
@@ -54,27 +54,27 @@ This file will be used later by the conf files to use the Okta provider.
 	* terraform init //you can execute the command as much as you want
 	* terraform plan
 	* terraform apply
-	* You should see the result in your okta tenant (a custom attributes is added to the user profile of okta)
+	* You should see the result in your Okta tenant (a custom attributes is added to the user profile of okta)
 
 ## Terraform Cloud
 1. Terraform cloud : https://app.terraform.io/signup/account to create an account
 	* Create workspace (tf-cronos-prod)
-	* Adding github as vcs https://www.terraform.io/docs/cloud/vcs/github.html
-		* add new oauth app on github https://github.com/settings/applications/new
+	* Adding GitHub as vcs https://www.terraform.io/docs/cloud/vcs/github.html
+		* add new OAuth app on GitHub https://github.com/settings/applications/new
 		* field values :
 			* Application Name  =  Terraform Cloud ("YOUR ORGANIZATION NAME")                          
 			* Homepage URL  = https://app.terraform.io (or the URL of your Terraform Enterprise instance)     
 			* Application Description  = Any description of your choice.                                                      	|
 			* Authorization callback URL =https://abc.com/(or any placeholder, correct URI doesn't exist until the next step.)
-		* downlaod logo https://www.terraform.io/docs/cloud/vcs/images/tfe_logo-c7548f8d.png
+		* download logo https://www.terraform.io/docs/cloud/vcs/images/tfe_logo-c7548f8d.png
 		* set background to #5C4EE5
 		* copy client id/ secret
 		* on terraform, settings > add vcs > github.com
 		* paste the client id/secret
-		* copy the url callback
-		* on github, update the url callback
+		* copy the URL callback
+		* on GitHub, update the URL callback
 		* on terraform, click connect organization
-		* authorize user access on github login page
+		* authorize user access on GitHub login page
 	* back on the terraform page of the workspace
 	* add terraform variables
 	```
@@ -83,7 +83,7 @@ This file will be used later by the conf files to use the Okta provider.
 		api_token = "<your-api-token>"
 	```
 	* make sure to select "sensitive" for the token (it makes it write-only, better security)
-	* add the identity file to the github repo
+	* add the identity file to the GitHub repo
 		* in windows, git clone https://github.com/richardupright/TF-cronos
 		* git init
 		* git add identity.tf
@@ -91,12 +91,12 @@ This file will be used later by the conf files to use the Okta provider.
 		* git push
 		*use git tortoise for windows to use a graphic interface*
 	* Now that you’ve configured your workspace, select Queue plan from the top right, enter a reason, and then press Queue plan.		
-2. using terraform for two environnements\
+2. using terraform for two environments\
 Before going further, make sure you have admin access to 2 Okta environments.\
-You will use ony git rep with different branches corresponding to the okta tenants.
+You will use one git rep with different branches corresponding to the Okta tenants.
 For easy configuration, master will be connected to the workspace TF-cronos-prod,
 and the branch 'dev' to the workspace TF-cronos-dev
-	* create a branch (dev) on the github repo
+	* create a branch (dev) on the GitHub repo
 		* on windows, git checkout -b dev
 		* git push origin dev
 	* create new workspace (tf-cronos-dev)
@@ -107,13 +107,13 @@ and the branch 'dev' to the workspace TF-cronos-dev
 		* on git, settings > branches > add rule and enter master as the branch pattern to protect
 		* apply the Require pull request reviews before merging and Require status checks to pass before merging
 		* select dismiss state pull and require review from code owners also
-	* applying changes to the prod environnement
+	* applying changes to the prod environment
 		* on git, open a pull request
 		* base master <- compare dev
 
 ## Atom
 
-Configure Atom for easier use of github
+Configure Atom for easier use of GitHub
   * Download here : https://atom.io/
   * plugins to install :
     * https://atom.io/packages/git-plus
@@ -128,8 +128,9 @@ Useful documentation :
 * [Source code of the Okta API](https://github.com/articulate/terraform-provider-okta/tree/master/okta)
 
 ## Limitations of the Okta provider
-This is a list of options the Okta provider does not offer yet (as of march 2020)
-* Customization Settings, exept template email
+This is a list of options the Okta provider does not offer yet (as of march 2020). The provider use the Okta API.
+* Active directory
+* Customization Settings, except template email
 * User Mappings
 * API	integrations on preconfigured applications, such as AWS SAML App.
 * SAML Roles on AWS SAML App
