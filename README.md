@@ -7,8 +7,8 @@ Terraform is an orchestration tool that uses declarative code to build, change a
 
 Terraform comes in 2 solutions : on-prem or cloud.
 * on-prem is free, no restriction.
-* cloud is free with a limit of 5 users in the team.
-\n You can also have Terraform Enterpise, which is the cloud solution without restrictions but isn't free.
+* cloud is free with a limit of 5 users in the team.\
+You can also have Terraform Enterpise, which is the cloud solution without restrictions but isn't free.
 
 ## Terraform on-prem (CLI)
 1. Install terraform (guide : https://learn.hashicorp.com/terraform/getting-started/install.html)
@@ -20,15 +20,15 @@ Create a directory, and in there create a file that Terraform will use later to 
 	*  cd okta-user-schema
 	*  terraform init
 		* Used to initialize a working directory containing Terraform configuration files. This is the first command that should be run after writing a new Terraform configuration or cloning an existing one from version control.
-	*  create the file "okta.auto.tfvars"
-	\n This file will be used later by the conf files to use the Okta provider.
+	*  create the file "okta.auto.tfvars"\
+This file will be used later by the conf files to use the Okta provider.
 	```
 		org_name  = "dev-1234"
 		base_url  = "okta.com"
 		api_token = "<your-api-token>"
 	```
-	For all files which match terraform.tfvars or .auto.tfvars present in the current directory, Terraform automatically loads them to populate variables. If the file is named something else, you can use the -var-file flag directly to specify a file.
-	\n **DO NOT PUSH THOSE FILES TO A VCS**
+	For all files which match terraform.tfvars or .auto.tfvars present in the current directory, Terraform automatically loads them to populate variables. If the file is named something else, you can use the -var-file flag directly to specify a file.\
+	**DO NOT PUSH THOSE FILES TO A VCS**
 	* To generate a new Okta API token, log into your Okta administrator console as a superuser and select API -> Tokens from the navigation menu. Next, click the Create Token button and give your token a name, then click Ok and copy the newly generated token into the configuration file above.
 	*  create the file *identity .tf*
 	This is the conf file that will specify which provider to use (Okta), and then add a custom attributes to the user schema
@@ -90,9 +90,9 @@ Create a directory, and in there create a file that Terraform will use later to 
 		* git push
 		*use git tortoise for windows to use a graphic interface*
 	* Now that you’ve configured your workspace, select Queue plan from the top right, enter a reason, and then press Queue plan.		
-2. using terraform for two environnements
-\n Before going further, make sure you have admin access to 2 Okta environments.
-\n You will use ony git rep with different branches corresponding to the okta tenants.
+2. using terraform for two environnements\
+Before going further, make sure you have admin access to 2 Okta environments.\
+You will use ony git rep with different branches corresponding to the okta tenants.
 For easy configuration, master will be connected to the workspace TF-cronos-prod,
 and the branch 'dev' to the workspace TF-cronos-dev
 	* create a branch (dev) on the github repo
@@ -122,14 +122,14 @@ Configure Atom for easier use of github
 
 ## Links to documentation
 
-Useful documentation :
+Useful documentation :\
 	* [Terraform docs](https://www.terraform.io/docs/providers/okta/index.html)
 	* [Terraform examples](https://github.com/articulate/terraform-provider-okta/tree/master/examples)
 	* [Source code of the Okta API](https://github.com/articulate/terraform-provider-okta/tree/master/okta)
 
 ## Limitations of the Okta provider
 
-This is a list of options the Okta provider does not offer yet (as of march 2020)
+This is a list of options the Okta provider does not offer yet (as of march 2020)\
 	* Customization Settings, exept template email
 	* User Mappings
 	* API	integrations on preconfigured applications, such as AWS SAML App.
