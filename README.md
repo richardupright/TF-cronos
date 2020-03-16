@@ -3,6 +3,7 @@
 * Okta as provider for Terraform : https://www.terraform.io/docs/providers/okta/r/user.html
 * Old examples : https://github.com/articulate/terraform-provider-okta-demos/tree/master/terraform
 
+Terraform is an orchestration tool that uses declarative code to build, change and version infrastructure that is made up of server instances and services. You can use Okta's official Terraform provider to interact with Okta services. Existing Okta infrastructure can be imported and brought under Terraform management. 
 
 1. Install terraform (guide : https://learn.hashicorp.com/terraform/getting-started/install.html)
 	*  download the zip, extract the *terraform.ex*e into *C:/Program Files/Terraform* (only file needed)
