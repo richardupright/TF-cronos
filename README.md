@@ -3,23 +3,35 @@
 * Okta as provider for Terraform : https://www.terraform.io/docs/providers/okta/r/user.html
 * Old examples : https://github.com/articulate/terraform-provider-okta-demos/tree/master/terraform
 
-Terraform is an orchestration tool that uses declarative code to build, change and version infrastructure that is made up of server instances and services. You can use Okta's official Terraform provider to interact with Okta services. Existing Okta infrastructure can be imported and brought under Terraform management. 
+Terraform is an orchestration tool that uses declarative code to build, change and version infrastructure that is made up of server instances and services. You can use Okta's official Terraform provider to interact with Okta services. Existing Okta infrastructure can be imported and brought under Terraform management.
 
+Terraform comes in 2 solutions : on-prem or cloud.
+* on-prem is free, no restriction
+* cloud is free with a limit of 5 users in the team
+You can also have Terraform Enterpise, which is the cloud solution without restrictions but isn't free.
+
+## Terraform on-prem (CLI)
 1. Install terraform (guide : https://learn.hashicorp.com/terraform/getting-started/install.html)
 	*  download the zip, extract the *terraform.ex*e into *C:/Program Files/Terraform* (only file needed)
 	*  configure the path (environnement variables > system var > path > add the path to exe file)
-2. Terraform Enterprise: Test connection with the okta tenant
+2. Test connection with Okta
+Create a directory, and in there create a file that Terraform will use later to apply configuration to Okta.
 	*  mkdir okta-user-schema
 	*  cd okta-user-schema
-	*  terraform init (does nothing if the rep is empty)
+	*  terraform init
+		* Used to initialize a working directory containing Terraform configuration files. This is the first command that should be run after writing a new Terraform configuration or cloning an existing one from version control.
 	*  create the file "okta.auto.tfvars"
+	This file will be used later by the conf files to use the Okta provider.
 	```
 		org_name  = "dev-1234"
 		base_url  = "okta.com"
 		api_token = "<your-api-token>"
 	```
+	For all files which match terraform.tfvars or .auto.tfvars present in the current directory, Terraform automatically loads them to populate variables. If the file is named something else, you can use the -var-file flag directly to specify a file.
+	**DO NOT PUSH THOSE FILES TO A VCS**
 	* To generate a new Okta API token, log into your Okta administrator console as a superuser and select API -> Tokens from the navigation menu. Next, click the Create Token button and give your token a name, then click Ok and copy the newly generated token into the configuration file above.
 	*  create the file *identity .tf*
+	This is the conf file that will specify which provider to use (Okta), and then add a custom attributes to the user schema
 	```
 		variable "org_name" {}
 		variable "api_token" {}
@@ -38,11 +50,13 @@ Terraform is an orchestration tool that uses declarative code to build, change a
 		}
 	```
 
-	* terraform init
+	* terraform init //you can execute the command as much as you want
 	* terraform plan
 	* terraform apply
-	* You should see the result in your okta tenant (a custom attributes is added to the profile of okta)
-3. Terraform cloud : https://app.terraform.io/signup/account to create an account
+	* You should see the result in your okta tenant (a custom attributes is added to the user profile of okta)
+
+## Terraform Cloud
+1. Terraform cloud : https://app.terraform.io/signup/account to create an account
 	* Create workspace (tf-cronos-prod)
 	* Adding github as vcs https://www.terraform.io/docs/cloud/vcs/github.html
 		* add new oauth app on github https://github.com/settings/applications/new
@@ -74,35 +88,43 @@ Terraform is an orchestration tool that uses declarative code to build, change a
 		* git add identity.tf
 		* git commit -m ""
 		* git push
-		*	use git tortoise for windows to use a graphic interface
+		*use git tortoise for windows to use a graphic interface*
 	* Now that you’ve configured your workspace, select Queue plan from the top right, enter a reason, and then press Queue plan.		
-4. using terraform for two environnements
+2. using terraform for two environnements
+Before going further, make sure you have admin access to 2 Okta environments.
+You will use ony git rep with different branches corresponding to the okta tenants.
+For easy configuration, master will be connected to the workspace TF-cronos-prod,
+and the branch 'dev' to the workspace TF-cronos-dev
 	* create a branch (dev) on the github repo
 		* on windows, git checkout -b dev
 		* git push origin dev
 	* create new workspace (tf-cronos-dev)
-		* select git as vcs, in advanced settings on step 3 specifythe vcs branch as dev
+		* select git as vcs, in advanced settings on step 3 specify the vcs branch as dev
 		* in settings of workspace, set for the method apply to auto apply (not manual)
-		* with auto apply, every commit on the branch dev will start a terraform plan / apply
-	* promote changes (let the dev team apply the change into the prod environnement)
+			* with auto apply, every commit on the branch dev will start a terraform plan / apply
+	* Apply the change you made in the dev branch into the prod branch
 		* on git, settings > branches > add rule and enter master as the branch pattern to protect
 		* apply the Require pull request reviews before merging and Require status checks to pass before merging
 		* select dismiss state pull and require review from code owners also
 	* applying changes to the prod environnement
 		* on git, open a pull request
 		* base master <- compare dev
-5. Configure Atom for easier use of github
+
+## Atom
+Configure Atom for easier use of github
     * Download here : https://atom.io/
     * plugins to install :
       * https://atom.io/packages/git-plus
       * https://atom.io/packages/language-hcl
       * https://atom.io/packages/atom-beautify
     * Configure github with SSH : https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh
-6. Links to documentation
+
+## Links to documentation
 	* [Terraform docs](https://www.terraform.io/docs/providers/okta/index.html)
 	* [Terraform examples](https://github.com/articulate/terraform-provider-okta/tree/master/examples)
 	* [Source code of the Okta API](https://github.com/articulate/terraform-provider-okta/tree/master/okta)
-7. Limitations
+
+## Limitations of the Okta provider
 	* Customization Settings, exept template email
 	* User Mappings
 	* API	integrations on preconfigured applications, such as AWS SAML App.
