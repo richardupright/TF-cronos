@@ -19,4 +19,12 @@ resource "okta_user" "addingJESUS" {
   title = "employe of Terraform"
   primary_phone = "+320485963258"
 }
+
+resource "okta_user" "addingUserWithID" {
+  id          = "00g26qaa4IMw25M2a4x6"
+  email 	    = "t@terraform.be"
+  login 	    = "t@terraform.be"
+  first_name  = "Test"
+  last_name   = "Test"
+}
 ################################################################################
