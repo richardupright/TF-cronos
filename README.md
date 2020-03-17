@@ -141,10 +141,10 @@ This is a list of options the Okta provider does not offer yet (as of march 2020
 Terraform is used to create, manage, and update infrastructure resources such as physical machines, VMs, network switches, containers, and more.
 A provider is responsible for understanding API interactions and exposing resources. Providers generally are an IaaS, PaaS, or SaaS services.
 ### Okta Provider
-The Okta provider is used to interact with the resources supported by Okta. The provider needs to be configured with the proper credentials before it can be used : the org name, the base url and the api token.
+The Okta provider is used to interact with the resources supported by Okta. The provider needs to be configured with the proper credentials before it can be used : the org name, the base url and the api token.\
 [Okta Provider Documentation](https://www.terraform.io/docs/providers/okta/index.html)
 #### Data sources
-Data sources refer to the resources retrievable from an Okta environment.
+Data sources refer to the resources retrievable from an Okta environment.\
 List of all resources available for the moment :
 * App_metadata_saml
 * App_saml
@@ -207,4 +207,36 @@ Resources refer to the resources creatable on an Okta environment.
 * user
 * profile_mapping
 
-##### Import
+## State
+Terraform must store state about your managed infrastructure and configuration. This state is used by Terraform to map real world resources to your configuration, keep track of metadata, and to improve performance for large infrastructures.
+
+This state is stored by default in a local file named *terraform.tfstate*, but it can also be stored remotely, which works better in a team environment.
+
+Terraform uses this local state to create plans and make changes to your infrastructure. Prior to any operation, Terraform does a refresh to update the state with the real infrastructure.
+
+While the format of the state files are just JSON, direct file editing of the state is discouraged. Terraform provides the terraform state command to perform basic modifications of the state using the CLI.
+
+## Import
+Terraform is able to import existing infrastructure. This allows you take resources you've created by some other means and bring it under Terraform management.\
+The current implementation of Terraform import can only import resources into the state. It does not generate configuration. A future version of Terraform will also generate configuration.
+Because of this, prior to running terraform import it is necessary to write manually a resource configuration block for the resource, to which the imported object will be mapped.\
+While this may seem tedious, it still gives Terraform users an avenue for importing existing resources. A future version of Terraform will fully generate configuration, significantly simplifying this process.
+
+### How to import
+The terraform import command is used to import existing infrastructure.
+
+The command currently can only import one resource at a time. This means you can't yet point Terraform import to an entire collection of resources such as an AWS VPC and import all of it. This workflow will be improved in a future version of Terraform.
+
+To import a resource, first write a resource block for it in your configuration, establishing the name by which it will be known to Terraform:
+```
+	resource okta_user example {}
+```
+If desired, you can leave the body of the resource block blank for now and return to fill it in once the instance is imported.
+
+Now terraform import can be run to attach an existing instance to this resource configuration:
+```
+	terraform import okta_user.example 00u26rcjhNGYPMsQU4x6
+```
+This command locates the Okta user with ID 00u26rcjhNGYPMsQU4x6. Then it attaches the existing settings of the user, as described by the Okta API, to the name okta_user.example of a module. Finally, the mapping is saved in the Terraform state.
+
+As a result of the above command, the resource is recorded in the state file.
