@@ -135,3 +135,76 @@ This is a list of options the Okta provider does not offer yet (as of march 2020
 * API	integrations on preconfigured applications, such as AWS SAML App.
 * SAML Roles on AWS SAML App
 * Hooking up inline token hooks (they can be created and managed but not flipped on)
+
+# Terraform : brief documentation
+## Providers
+Terraform is used to create, manage, and update infrastructure resources such as physical machines, VMs, network switches, containers, and more.
+A provider is responsible for understanding API interactions and exposing resources. Providers generally are an IaaS, PaaS, or SaaS services.
+### Okta Provider
+The Okta provider is used to interact with the resources supported by Okta. The provider needs to be configured with the proper credentials before it can be used : the org name, the base url and the api token.
+[Okta Provider Documentation](https://www.terraform.io/docs/providers/okta/index.html)
+#### Data sources
+Data sources refer to the resources retrievable from an Okta environment.
+List of all resources available for the moment :
+* App_metadata_saml
+* App_saml
+* App
+* Auth_server
+* Auth_server_policy
+* Default_policy
+* Everyone_group
+* Group
+* IDP_metadata_saml
+* IDP_saml
+* Policy
+* User_profile_mapping_source
+* User
+* Users
+
+#### Resources
+Resources refer to the resources creatable on an Okta environment.
+* app_auto_login
+* app_bookmark
+* app_basic_auth
+* app_auto_login
+* app_bookmark
+* app_basic_auth
+* app_group_assignment
+* app_oauth
+* app_saml
+* app_secure_password_store
+* app_swa
+* app_three_field
+* app_user_base_schema
+* app_user_schema
+* app_user
+* auth_server_claim
+* auth_server_policy_rule
+* auth_server_policy
+* auth_server_scope
+* auth_server
+* factor
+* group_roles
+* group_rule
+* group
+* idp_oidc
+* idp_saml_signing_key
+* idp_saml
+* idp_social
+* inline_hook
+* network_zone
+* policy_mfa
+* policy_password
+* policy_rule_idp_discovery
+* policy_rule_mfa
+* policy_rule_password
+* policy_rule_signon
+* policy_signon
+* template_email
+* trusted_origin
+* user_base_schema
+* user_schema
+* user
+* profile_mapping
+
+##### Import
