@@ -1,6 +1,5 @@
-# Terraform Cloud w/ Okta <img style="float: left;" src="hashicorp-terraform-logo.png" alt="Terraform logo" width="193" height="193">
-
-
+# Terraform Cloud w/ Okta
+[//]: # (<img style="float: left;" src="hashicorp-terraform-logo.png" alt="Terraform logo" width="193" height="193">)
 
 Terraform is an orchestration tool that uses declarative code to build, change and version infrastructure that is made up of server instances and services. You can use Okta's official Terraform provider to interact with Okta services. Existing Okta infrastructure can be imported and brought under Terraform management.
 
@@ -12,17 +11,18 @@ You can also have Terraform Enterprise, which is the cloud solution without rest
 Terraform [pricings](https://www.hashicorp.com/products/terraform/pricing/)
 
 ## Terraform on-prem (CLI)
-See this [guide](https://learn.hashicorp.com/terraform/getting-started/install.html) for more informations.
+See this [guide](https://learn.hashicorp.com/terraform/getting-started/install.html) for more information.
+
 1. Install terraform
-	*  download the zip, extract the *terraform.exe* into *C:/Program Files/Terraform* (only file needed)
-	*  Add the exe path to the env. variables (environment variables > system var > path > add the path to exe file)
+	1.  download the [zip](https://www.terraform.io/downloads.html), extract the *terraform.exe* into *C:/Program Files/Terraform* (only file needed)
+	1.  Add the exe path to the env. variables (environment variables > system var > path > add the path to exe file)
 2. Test connection with Okta
 Create a directory, and in there create a file that Terraform will use later to apply configuration to Okta.
-	*  mkdir okta-user-schema (this will be the directory)
-	*  cd okta-user-schema
-	*  terraform init
+	1.  mkdir okta-user-schema (this will be the directory)
+	1.  cd okta-user-schema
+	1.  terraform init
 		* Used to initialize a working directory containing Terraform configuration files. This is the first command that should be run after writing a new Terraform configuration or cloning an existing one from version control.
-	*  create the file "okta.auto.tfvars"\
+	1.  create the file "okta.auto.tfvars"\
 This file will be used later by the conf files (a .tf file) to use the Okta provider.
 	```
 		org_name  = "dev-1234"
@@ -30,9 +30,9 @@ This file will be used later by the conf files (a .tf file) to use the Okta prov
 		api_token = "<your-api-token>"
 	```
 	For all files which match terraform.tfvars or .auto.tfvars present in the current directory, Terraform automatically loads them to populate variables. If the file is named something else, you can use the -var-file flag directly to specify a file.\
-	**DO NOT PUSH THOSE FILES TO A VCS** : you don't want your api token to be public, and your vcs will be public.
-	* To generate a new Okta API token, log into your Okta administrator console as a superuser and select API -> Tokens from the navigation menu. Next, click the Create Token button and give your token a name, then click Ok and copy the newly generated token into the configuration file above.
-	*  create the file *identity .tf*
+	 **DO NOT PUSH THOSE FILES TO A VCS** : you don't want your api token to be public, and your vcs will be public.
+	1. To generate a new Okta API token, log into your Okta administrator console as a superuser and select API -> Tokens from the navigation menu. Next, click the Create Token button and give your token a name, then click Ok and copy the newly generated token into the configuration file above.
+	1.  create the file *identity .tf*
 	This is the conf file that will specify which provider to use (Okta), and then add a custom attributes to the user schema.
   The name of the file does not matter, Terraform will go through every .tf files located in the directory.
 
@@ -54,72 +54,81 @@ This file will be used later by the conf files (a .tf file) to use the Okta prov
 		}
 	```
   When Terraform reads this file, he sees the variables declared but not initialized (no attributes are configured) so it will look for a .tfvars file to fill any variables it can.
-	* terraform init //you can execute the command as much as you want
-	* terraform plan
+	1. terraform init //you can execute the command as much as you want
+	1. terraform plan
 		* In this step, Terraform will make a comparison between the state and the resources created in the .tf files : the state refers to what Terraform knows from an environment (it's configuration). This means that Terraform will check what resources need to be created/updated/deleted.
-	* terraform apply
+	1. terraform apply
 		* Terraform performs the changes it established in the plan step.
-	* You should see the result in your Okta tenant (a custom attributes is added to the user profile of okta)
+	1. You should see the result in your Okta tenant (a custom attributes is added to the user profile of okta)
 
 ## Terraform Cloud
-1. Terraform cloud : [Create an account](https://app.terraform.io/signup/account)
-	* Create workspace (tf-cronos-prod)
-		* Workspaces describe your environments (production, staging, development, etc.).
-	* [Adding GitHub as vcs](https://www.terraform.io/docs/cloud/vcs/github.html)
-		* [add new OAuth app on GitHub](https://github.com/settings/applications/new)
-		* field values :
-			* Application Name  =  Terraform Cloud ("YOUR ORGANIZATION NAME")                          
-			* Homepage URL  = https://app.terraform.io (or the URL of your Terraform Enterprise instance)     
-			* Application Description  = Any description of your choice.                                                      	|
-			* Authorization callback URL =https://abc.com/(or any placeholder, correct URI doesn't exist until the next step.)
-		* [download logo](https://www.terraform.io/docs/cloud/vcs/images/tfe_logo-c7548f8d.png)
-		* set background to #5C4EE5
-		* copy client id/ secret
-		* on terraform, settings > add vcs > github.com
-		* paste the client id/secret
-		* copy the URL callback
-		* on GitHub, update the URL callback
-		* on terraform, click *connect organization*
-		* authorize user access on GitHub login page
-	* back on the terraform page of the workspace
-	* add terraform variables
+Start by creating an account for Terraform cloud (free) : [Create an account.](https://app.terraform.io/signup/account)\
+Once you have an account :
+1. Create a workspace (named *tf-cronos-prod*)
+	* Workspaces describe your environments (production, staging, development, etc.).
+1. [Adding GitHub as vcs](https://www.terraform.io/docs/cloud/vcs/github.html)
+	* [On GitHub, add an OAuth app](https://github.com/settings/applications/new)
+	* field values :
+		* Application Name  =  Terraform Cloud ("YOUR ORGANIZATION NAME")                          
+		* Homepage URL  = https://app.terraform.io (or the URL of your Terraform Enterprise instance)     
+		* Application Description  = Any description of your choice.                                                      	|
+		* Authorization callback URL =https://abc.com/(or any placeholder, correct URI doesn't exist until the next step.)
+	* [download logo](https://www.terraform.io/docs/cloud/vcs/images/tfe_logo-c7548f8d.png) and set it as the app's logo.
+	* set the background to #5C4EE5 (color of Terraform)
+	* copy the client id/ secret
+		* you will need it to configure the vcs on Terraform
+	* Back on Terraform, settings > add vcs > github.com
+	* paste the client id/secret you copied before
+	* copy the URL callback
+	* Now on GitHub, update the URL callback
+	* Finally on Terraform, click *connect organization*
+	* authorize user access on GitHub login page
+1. back on the terraform page of the workspace, add terraform variables
 	```
 		org_name  = "dev-1234"
 		base_url  = "okta.com"
 		api_token = "<your-api-token>"
 	```
-		* This removes the need to use a .tfvars file : that means you don't need to have a .tfvars on github (for security) because Terraform will look into the variables configured in the cloud (the variables are declared for one workspace)
+	* This removes the need to use a .tfvars file : that means you don't need to have a .tfvars on github (for security) because Terraform will look into the variables configured in the cloud (the variables are declared for one workspace)
 	* make sure to select "sensitive" for the token (it makes it write-only, better security)
-	* add the identity file to the GitHub repo
-		* in windows, git clone https://github.com/richardupright/TF-cronos
-		* git init
-		* git add identity.tf
-		* git commit -m ""
-		* git push
-		*use git tortoise for windows to use a graphic interface*
-	* Now that you’ve configured your workspace, select Queue plan from the top right, enter a reason, and then press Queue plan.\
-	While we had to execute the terraform commands with the CLI solution (plan and apply), the cloud solution works differently : once the files are pushed to the VCS, you must *queue* a plan, which will make terraform execute itself the commands *plan* and *apply*. 	
-2. using terraform for two environments\
+1. add the identity file to the GitHub repo
+	* in windows,
+	```
+	git clone https://github.com/richardupright/TF-cronos
+	git init
+	git add identity.tf
+	git commit -m ""
+	git push
+	```
+	* *use **git tortoise** for windows to have a graphic interface*
+1. Now that you’ve configured your workspace, select *Queue plan* from the top right, enter a reason, and then press Queue plan.\
+While we had to execute the terraform commands with the CLI solution (plan and apply), the cloud solution works differently : once the files are pushed to the VCS, you must *queue* a plan, which will make terraform execute itself the commands *plan* and *apply*. 	
+
+### Using terraform for two environments
 Before going further, make sure you have admin access to 2 Okta environments.\
 One workspace on Terraform "corresponds" to an Okta environment : a workspace (TF-cronos-prod) is connected to the Okta environment that is already configured, another workspace (TF-cronos-dev) is connected to the Okta environment that is not yet configured.
 You will use only one git rep with two different branches corresponding to the Okta tenants.
 For easy configuration, branch *master* will be connected to the workspace TF-cronos-prod,
 and the branch *dev* to the workspace TF-cronos-dev
-	* create a branch (dev) on the GitHub repo
-		* on windows, git checkout -b dev
-		* git push origin dev
-	* create new workspace (tf-cronos-dev)
-		* select git as vcs, in advanced settings on step 3 specify the vcs branch as dev
-			* if this is not specified, Terraform will use the master branch to check for configuration files.
-		* in settings of the workspace, set for the method apply to auto apply (not manual)
-			* with auto apply, every commit on the branch dev will start a terraform plan / apply (a queue)
-	* When you want to apply the change you made in the dev branch into the prod branch, you have to configure the branch to be *protected*
-		* on git, settings > branches > add rule and enter master as the branch pattern to protect
-		* apply the Require pull request reviews before merging and Require status checks to pass before merging
-		* select *dismiss state pull* and *require review from code owners* also
-	* applying changes to the prod environment
-		* on git, open a pull request
-		* base master <- compare dev
+1. create a branch (*dev*) in your GitHub repo
+	* on windows
+	```
+	git checkout -b dev
+	git push origin dev
+	```
+1. create a new workspace on Terraform (*tf-cronos-dev*)
+	* select git as vcs, in advanced settings on step 3 specify the vcs branch as dev
+		* if this is not specified, Terraform will use the master branch to check for configuration files.
+	* in the settings of the workspace, set the apply method to auto apply (not manual)
+		* with auto apply, every push on the branch dev will start a terraform plan / apply (a queue)
+		* with manual apply, you need to queue a plan manually everytime you want to apply a new configuration
+1. When you want to apply the change you made in the dev branch into the prod branch, you have to configure the master branch to be *protected*
+	* on git, settings > branches > add rule and enter master as the branch pattern to protect
+	* apply the *Require pull request reviews before merging* and *Require status checks to pass before merging*
+	* select *dismiss state pull* and *require review from code owners* also
+1. applying changes to the prod environment
+	* on git, open a pull request
+	* base master <- compare dev
 
 
 # Terraform : brief documentation
