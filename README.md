@@ -240,3 +240,35 @@ Now terraform import can be run to attach an existing instance to this resource 
 This command locates the Okta user with ID 00u26rcjhNGYPMsQU4x6. Then it attaches the existing settings of the user, as described by the Okta API, to the name okta_user.example of a module. Finally, the mapping is saved in the Terraform state.
 
 As a result of the above command, the resource is recorded in the state file.
+
+
+
+# Rockstar chrome browser extension
+[link to download](https://chrome.google.com/webstore/detail/rockstar/chjepkekmhealpjipcggnfepkkfeimbd)
+
+Enhance Okta with these features:
+
+* Export Objects to CSV :
+	* Users
+	* Groups
+	* Group Members
+	* Group Rules
+	* Directory Users
+	* Apps
+	* App Users
+	* App Groups
+	* App Notes
+	* Network Zones
+	* YubiKeys
+	* Mappings
+	* Admins
+* User home page: Show SSO (SAML assertion...)
+* People page: enhanced search
+* Person page: show login/email and AD info, show user detail, enhance menus/title, manage user's admin roles, verify factors
+* Groups page: search using regular expressions (like wildcards)
+* Action Directory page: show OU tooltips, export OUs
+* Identity Providers page: show SAML certificate expiration date
+* Events: Expand All and Expand Each Row
+* API: API Explorer, Pretty Print JSON
+
+Note: This extension was not created by Okta. It is not supported by Okta. It is an unofficial extension created by the community.
