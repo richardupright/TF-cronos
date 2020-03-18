@@ -31,7 +31,7 @@ Create a directory, and in there create a file that Terraform will use later to 
 		api_token = "<your-api-token>"
 	```
 	For all files which match terraform.tfvars or .auto.tfvars present in the current directory, Terraform automatically loads them to populate variables. If the file is named something else, you can use the -var-file flag directly to specify a file.
- 	**DO NOT PUSH THOSE FILES TO A VCS** : you don't want your api token to be public, and your vcs will be public.
+ 	**DO NOT PUSH THOSE FILES TO A VCS** : you don't want your api token to be public, and your VCS will be public.
 1. To generate a new Okta API token, log into your Okta administrator console as a superuser and select API -> Tokens from the navigation menu. Next, click the Create Token button and give your token a name, then click Ok and copy the newly generated token into the configuration file above.
 1.  create the file "identity .tf"\
 	This is the conf file that will specify which provider to use (Okta), and then add a custom attributes to the user schema.
@@ -76,8 +76,8 @@ Once you have an account :
 	1. [download logo](https://www.terraform.io/docs/cloud/vcs/images/tfe_logo-c7548f8d.png) and set it as the app's logo.
 	1. set the background to #5C4EE5 (color of Terraform)
 	1. copy the client id/ secret
-		* you will need it to configure the vcs on Terraform
-	1. Back on Terraform, settings > add vcs > github.com
+		* you will need it to configure the VCS on Terraform
+	1. Back on Terraform, settings > add VCS > github.com
 	1. paste the client id/secret you copied before
 	1. copy the URL callback
 	1. Now on GitHub, update the URL callback
@@ -89,7 +89,7 @@ Once you have an account :
 		base_url  = "okta.com"
 		api_token = "<your-api-token>"
 	```
-	* This removes the need to use a .tfvars file : that means you don't need to have a .tfvars on github (for security) because Terraform will look into the variables configured in the cloud (the variables are declared for one workspace)
+	* This removes the need to use a .tfvars file : that means you don't need to have a .tfvars on GitHub (for security) because Terraform will look into the variables configured in the cloud (the variables are declared for one workspace)
 	* make sure to select "sensitive" for the token (it makes it write-only, better security)
 1. add the identity file to the GitHub repo
 	* in windows,
@@ -117,11 +117,11 @@ and the branch *dev* to the workspace TF-cronos-dev
 	git push origin dev
 	```
 1. create a new workspace on Terraform (*tf-cronos-dev*)
-	1. select git as vcs, in advanced settings on step 3 specify the vcs branch as dev
+	1. select git as VCS, in advanced settings on step 3 specify the VCS branch as dev
 		* if this is not specified, Terraform will use the master branch to check for configuration files.
 	1. in the settings of the workspace, set the apply method to auto apply (not manual)
 		* with auto apply, every push on the branch dev will start a terraform plan / apply (a queue)
-		* with manual apply, you need to queue a plan manually everytime you want to apply a new configuration
+		* with manual apply, you need to queue a plan manually every time you want to apply a new configuration
 1. When you want to apply the change you made in the dev branch into the prod branch, you have to configure the master branch to be *protected*
 	1. on git, settings > branches > add rule and enter master as the branch pattern to protect
 	1. apply the *Require pull request reviews before merging* and *Require status checks to pass before merging*
@@ -136,7 +136,7 @@ and the branch *dev* to the workspace TF-cronos-dev
 Terraform is used to create, manage, and update infrastructure resources such as physical machines, VMs, network switches, containers, and more.
 A provider is responsible for understanding API interactions and exposing resources. Providers generally are an IaaS, PaaS, or SaaS services.
 ### Okta Provider
-The Okta provider is used to interact with the resources supported by Okta. The provider needs to be configured with the proper credentials before it can be used : the org name, the base url and the api token.\
+The Okta provider is used to interact with the resources supported by Okta. The provider needs to be configured with the proper credentials before it can be used : the org name, the base URL and the api token.\
 [Okta Provider Documentation](https://www.terraform.io/docs/providers/okta/index.html)
 #### Data sources
 Data sources refer to the resources retrievable from an Okta environment.\
@@ -246,8 +246,48 @@ This command locates the Okta user with ID 00u26rcjhNGYPMsQU4x6. Then it attache
 As a result of the above command, the resource is recorded in the state file.
 
 # Workaround to import configuration from one environment to another
-I have not found a solution from Terraform to actually import a configuration from a configured OKTA environment to Terraform : there are such solutions with other provider (like AWS or Linode) where you can import a full instance (by using its ID) into Terraform and configure a new environment based on that import. This is because on those providers, the API has a resource type named something like linode_instance or aws_instance which reffers to a complete configuration of an environment. The Okta provider (which use the Okta API) has nothing like that...\
-As a workaround, I use a chrome extension ([Rockstar](# Rockstar chrome browser extension))
+I have not found a solution from Terraform to actually import a configuration from a configured OKTA environment to Terraform : there are such solutions with other provider (like AWS or Linode) where you can import a full instance (by using its ID) into Terraform and configure a new environment based on that import. This is because on those providers, the API has a resource type named something like linode_instance or aws_instance which refers to a complete configuration of an environment. The Okta provider (which use the Okta API) has nothing like that...\
+
+As a workaround, I use a chrome extension : [Rockstar](#Rockstar chrome browser extension) to retrieve the IDs of some resource (you can see the list of what's retrievable below). I use the extension because I need the list of resources ID that I want to import (the terraform import command needs the ID as argument) and Okta does not provide any practical solution to have all ID of resources in the Okta environment, while the Rockstar extension does provide it.
+
+When exporting resources with the extension, you get a .csv file that you will need to adjust using Excel (open the document > select the column > in the Data > text to column > delimited > comma).
+
+Once you have the IDs : in a directory configured with Terraform (meaning to have at least a .tfvars and one .tf file), add in the .tf file a resource line but do not configure it (don't add attributes) : when Terraform will import a resource, it needs a location to put the configuration it is importing, and will generate the attributes itself.\
+Example : to import a user, get it's ID then in a .tf file write :
+```
+	resource okta_user userToImport {}
+```
+After that you can execute this command in a terminal :
+```
+	terraform import okta_user.userToImport 00u26rcjhNGYPMsQU4x6
+```
+Now the **state** has been updated (not the .tf file, this one is still empty just like we wrote it).
+We need to get the state into a file (the command show display the state), so we use the output redirection :
+```
+	terraform show > file.tf
+```
+Now we have file containing the data we need to create a user to another environment.
+
+Move the *file.tf* into a new directory which must be configured with another Okta environment (adapt the .tfvars).
+The encoding and the format of the file is just like we need to create a resource, but it needs to be filter because the terraform show commands use a special format : the tabulations need to be removed.
+To remove it, open the file in Notepad++ > ctrl+h (search > replace) > select the regex expression > enter this
+```
+	 \x1b\[\dm
+```
+and replace every occurrences.
+
+Some attributes that were imported by Terraform can not be included in the resource's attributes : the id, the sign_on, and some other attributes must be created by Terraform (they are known after the apply) and not by the user. This means that sometimes you need to remove those attributes
+```
+	[a-z]+_id\s+=\s[!-z]+   (this removes lines like : client_id = "123")
+	id\s+=\s[!-z]+   (this removes lines like : id = "123")
+```
+
+Now we have a working .tf file we can use to create resource into the new Okta environment.
+```
+	terraform plan
+	terraform apply 
+```
+
 
 # Rockstar chrome browser extension
 [link to download](https://chrome.google.com/webstore/detail/rockstar/chjepkekmhealpjipcggnfepkkfeimbd)
@@ -287,7 +327,7 @@ Configure Atom for easier use of GitHub
     * https://atom.io/packages/git-plus
     * https://atom.io/packages/language-hcl
     * https://atom.io/packages/atom-beautify
-  * [Configure github with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)
+  * [Configure GitHub with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)
 
 ## Links to documentation
 Useful documentation :
