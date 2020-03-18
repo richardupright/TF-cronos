@@ -248,7 +248,7 @@ As a result of the above command, the resource is recorded in the state file.
 # Workaround to import configuration from one environment to another
 I have not found a solution from Terraform to actually import a configuration from a configured OKTA environment to Terraform : there are such solutions with other provider (like AWS or Linode) where you can import a full instance (by using its ID) into Terraform and configure a new environment based on that import. This is because on those providers, the API has a resource type named something like linode_instance or aws_instance which refers to a complete configuration of an environment. The Okta provider (which use the Okta API) has nothing like that...\
 
-As a workaround, I use a chrome extension : [Rockstar](#Rockstar chrome browser extension) to retrieve the IDs of some resource (you can see the list of what's retrievable below). I use the extension because I need the list of resources ID that I want to import (the terraform import command needs the ID as argument) and Okta does not provide any practical solution to have all ID of resources in the Okta environment, while the Rockstar extension does provide it.
+As a workaround, I use a chrome extension : [Rockstar](#rockstar-chrome-browser-extension) to retrieve the IDs of some resource (you can see the list of what's retrievable below). I use the extension because I need the list of resources ID that I want to import (the terraform import command needs the ID as argument) and Okta does not provide any practical solution to have all ID of resources in the Okta environment, while the Rockstar extension does provide it.
 
 When exporting resources with the extension, you get a .csv file that you will need to adjust using Excel (open the document > select the column > in the Data > text to column > delimited > comma).
 
@@ -285,7 +285,7 @@ Some attributes that were imported by Terraform can not be included in the resou
 Now we have a working .tf file we can use to create resource into the new Okta environment.
 ```
 	terraform plan
-	terraform apply 
+	terraform apply
 ```
 
 
