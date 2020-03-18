@@ -36,6 +36,7 @@ Create a directory, and in there create a file that Terraform will use later to 
 1.  create the file "identity .tf"\
 	This is the conf file that will specify which provider to use (Okta), and then add a custom attributes to the user schema.
 	The name of the file does not matter, Terraform will go through every .tf files located in the directory.
+	When Terraform reads this file, he sees the variables declared but not initialized (no attributes are configured) so it will look for a .tfvars file to fill any variables it can.
   ```
 	  variable "org_name" {}
 	  variable "api_token" {}
@@ -53,7 +54,6 @@ Create a directory, and in there create a file that Terraform will use later to 
 		  master = "PROFILE_MASTER"
 	  }
   ```
-	When Terraform reads this file, he sees the variables declared but not initialized (no attributes are configured) so it will look for a .tfvars file to fill any variables it can.
 1. *terraform init* (you can execute the command as much as you want)
 1. *terraform plan*
 	* In this step, Terraform will make a comparison between the state and the resources created in the .tf files : the state refers to what Terraform knows from an environment (it's configuration). This means that Terraform will check what resources need to be created/updated/deleted.
