@@ -5,7 +5,7 @@ Terraform is an orchestration tool that uses declarative code to build, change a
 
 Terraform comes in 2 solutions : on-prem or cloud.
 * on-prem is free, no restriction.
-* cloud is free with a limit of 5 users in the team.\
+* cloud is free with a limit of 5 users in the team.
 
 You can also have Terraform Enterprise, which is the cloud solution without restrictions but isn't free.\
 Terraform [pricings](https://www.hashicorp.com/products/terraform/pricing/)
@@ -53,8 +53,8 @@ The name of the file does not matter, Terraform will go through every .tf files 
 		master = "PROFILE_MASTER"
 	}
 ```
-	When Terraform reads this file, he sees the variables declared but not initialized (no attributes are configured) so it will look for a .tfvars file to fill any variables it can.
-1. *terraform init* //you can execute the command as much as you want
+	* When Terraform reads this file, he sees the variables declared but not initialized (no attributes are configured) so it will look for a .tfvars file to fill any variables it can.
+1. *terraform init* (you can execute the command as much as you want)
 1. *terraform plan*
 	* In this step, Terraform will make a comparison between the state and the resources created in the .tf files : the state refers to what Terraform knows from an environment (it's configuration). This means that Terraform will check what resources need to be created/updated/deleted.
 1. *terraform apply*
@@ -67,22 +67,22 @@ Once you have an account :
 1. Create a workspace (named *tf-cronos-prod*)
 	* Workspaces describe your environments (production, staging, development, etc.).
 1. [Adding GitHub as vcs](https://www.terraform.io/docs/cloud/vcs/github.html)
-	* [On GitHub, add an OAuth app](https://github.com/settings/applications/new)
-	* field values :
-		* Application Name  =  Terraform Cloud ("YOUR ORGANIZATION NAME")                          
-		* Homepage URL  = https://app.terraform.io (or the URL of your Terraform Enterprise instance)     
-		* Application Description  = Any description of your choice.                                                      	|
-		* Authorization callback URL =https://abc.com/(or any placeholder, correct URI doesn't exist until the next step.)
-	* [download logo](https://www.terraform.io/docs/cloud/vcs/images/tfe_logo-c7548f8d.png) and set it as the app's logo.
-	* set the background to #5C4EE5 (color of Terraform)
-	* copy the client id/ secret
+	1. [On GitHub, add an OAuth app](https://github.com/settings/applications/new)
+		* field values :
+			* Application Name  =  Terraform Cloud ("YOUR ORGANIZATION NAME")                          
+			* Homepage URL  = https://app.terraform.io (or the URL of your Terraform Enterprise instance)     
+			* Application Description  = Any description of your choice.                                                      	|
+			* Authorization callback URL =https://abc.com/(or any placeholder, correct URI doesn't exist until the next step.)
+	1. [download logo](https://www.terraform.io/docs/cloud/vcs/images/tfe_logo-c7548f8d.png) and set it as the app's logo.
+	1. set the background to #5C4EE5 (color of Terraform)
+	1. copy the client id/ secret
 		* you will need it to configure the vcs on Terraform
-	* Back on Terraform, settings > add vcs > github.com
-	* paste the client id/secret you copied before
-	* copy the URL callback
-	* Now on GitHub, update the URL callback
-	* Finally on Terraform, click *connect organization*
-	* authorize user access on GitHub login page
+	1. Back on Terraform, settings > add vcs > github.com
+	1. paste the client id/secret you copied before
+	1. copy the URL callback
+	1. Now on GitHub, update the URL callback
+	1. Finally on Terraform, click *connect organization*
+	1. authorize user access on GitHub login page
 1. back on the terraform page of the workspace, add terraform variables
 	```
 		org_name  = "dev-1234"
@@ -117,18 +117,18 @@ and the branch *dev* to the workspace TF-cronos-dev
 	git push origin dev
 	```
 1. create a new workspace on Terraform (*tf-cronos-dev*)
-	* select git as vcs, in advanced settings on step 3 specify the vcs branch as dev
+	1. select git as vcs, in advanced settings on step 3 specify the vcs branch as dev
 		* if this is not specified, Terraform will use the master branch to check for configuration files.
-	* in the settings of the workspace, set the apply method to auto apply (not manual)
+	1. in the settings of the workspace, set the apply method to auto apply (not manual)
 		* with auto apply, every push on the branch dev will start a terraform plan / apply (a queue)
 		* with manual apply, you need to queue a plan manually everytime you want to apply a new configuration
 1. When you want to apply the change you made in the dev branch into the prod branch, you have to configure the master branch to be *protected*
-	* on git, settings > branches > add rule and enter master as the branch pattern to protect
-	* apply the *Require pull request reviews before merging* and *Require status checks to pass before merging*
-	* select *dismiss state pull* and *require review from code owners* also
+	1. on git, settings > branches > add rule and enter master as the branch pattern to protect
+	1. apply the *Require pull request reviews before merging* and *Require status checks to pass before merging*
+	1. select *dismiss state pull* and *require review from code owners* also
 1. applying changes to the prod environment
-	* on git, open a pull request
-	* base master <- compare dev
+	1. on git, open a pull request
+	1. base master <- compare dev
 
 
 # Terraform : brief documentation
