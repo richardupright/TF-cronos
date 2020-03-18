@@ -37,23 +37,23 @@ Create a directory, and in there create a file that Terraform will use later to 
 	This is the conf file that will specify which provider to use (Okta), and then add a custom attributes to the user schema.
 	The name of the file does not matter, Terraform will go through every .tf files located in the directory.
 	When Terraform reads this file, he sees the variables declared but not initialized (no attributes are configured) so it will look for a .tfvars file to fill any variables it can.
-  ```
-	  variable "org_name" {}
-	  variable "api_token" {}
-	  variable "base_url" {}
+  	```
+	  	variable "org_name" {}
+	  	variable "api_token" {}
+	  	variable "base_url" {}
 
-	  provider "okta" {
-		  org_name = var.org_name
-		  base_url = var.base_url
-		  api_token = var.api_token
-	  }
-	  resource "okta_user_schema" "dob_extension" {
-		  index  = "date_of_birth"
-		  title  = "Date of Birth"
-		  type   = "string"
-		  master = "PROFILE_MASTER"
-	  }
-  ```
+	  	provider "okta" {
+		  	org_name = var.org_name
+		  	base_url = var.base_url
+		  	api_token = var.api_token
+	  	}
+	  	resource "okta_user_schema" "dob_extension" {
+		  	index  = "date_of_birth"
+		  	title  = "Date of Birth"
+		  	type   = "string"
+		  	master = "PROFILE_MASTER"
+	  	}
+  	```
 1. *terraform init* (you can execute the command as much as you want)
 1. *terraform plan*
 	* In this step, Terraform will make a comparison between the state and the resources created in the .tf files : the state refers to what Terraform knows from an environment (it's configuration). This means that Terraform will check what resources need to be created/updated/deleted.
