@@ -324,20 +324,19 @@ Note: This extension was not created by Okta. It is not supported by Okta. It is
 ## Atom
 
 Configure Atom for easier use of GitHub
-  * Download [here](https://atom.io/)
-  * plugins to install :
-    * https://atom.io/packages/git-plus
-    * https://atom.io/packages/language-hcl
-    * https://atom.io/packages/atom-beautify
-  * [Configure GitHub with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)
+* Download [here](https://atom.io/)
+* plugins to install :
+  * https://atom.io/packages/git-plus
+  * https://atom.io/packages/language-hcl
+  * https://atom.io/packages/atom-beautify
+* [Configure GitHub with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)
 
 ## Links to documentation
 
 Useful documentation :
-
-	* [Terraform docs](https://www.terraform.io/docs/providers/okta/index.html)
-	* [Terraform examples](https://github.com/articulate/terraform-provider-okta/tree/master/examples)
-	* [Source code of the Okta API](https://github.com/articulate/terraform-provider-okta/tree/master/okta)
-	* [guide](https://developer.okta.com/blog/2020/02/03/managing-multiple-okta-instances-with-terraform-cloud)
-	* [Okta as provider for Terraform](https://www.terraform.io/docs/providers/okta/r/user.html)
-	* [Old examples](https://github.com/articulate/terraform-provider-okta-demos/tree/master/terraform)
+* [Terraform docs](https://www.terraform.io/docs/providers/okta/index.html)
+* [Terraform examples](https://github.com/articulate/terraform-provider-okta/tree/master/examples)
+* [Source code of the Okta API](https://github.com/articulate/terraform-provider-okta/tree/master/okta)
+* [guide](https://developer.okta.com/blog/2020/02/03/managing-multiple-okta-instances-with-terraform-cloud)
+* [Okta as provider for Terraform](https://www.terraform.io/docs/providers/okta/r/user.html)
+* [Old examples](https://github.com/articulate/terraform-provider-okta-demos/tree/master/terraform)
