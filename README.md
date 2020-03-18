@@ -1,6 +1,11 @@
-# Terraform Cloud w/ Okta
-![Terraform Logo](/hashicorp-terraform-logo.png)
+<img style="float: left;" src="hashicorp-terraform-logo.png" alt="Terraform logo" width="193" height="193">
 
+# Terraform Cloud w/ Okta
+
+\
+\
+\
+\
 Terraform is an orchestration tool that uses declarative code to build, change and version infrastructure that is made up of server instances and services. You can use Okta's official Terraform provider to interact with Okta services. Existing Okta infrastructure can be imported and brought under Terraform management.
 
 Terraform comes in 2 solutions : on-prem or cloud.
@@ -119,23 +124,6 @@ and the branch *dev* to the workspace TF-cronos-dev
 		* on git, open a pull request
 		* base master <- compare dev
 
-## Links to documentation
-Useful documentation :
-* [Terraform docs](https://www.terraform.io/docs/providers/okta/index.html)
-* [Terraform examples](https://github.com/articulate/terraform-provider-okta/tree/master/examples)
-* [Source code of the Okta API](https://github.com/articulate/terraform-provider-okta/tree/master/okta)
-* [guide](https://developer.okta.com/blog/2020/02/03/managing-multiple-okta-instances-with-terraform-cloud)
-* [Okta as provider for Terraform](https://www.terraform.io/docs/providers/okta/r/user.html)
-* [Old examples](https://github.com/articulate/terraform-provider-okta-demos/tree/master/terraform)
-
-## Limitations of the Okta provider
-This is a list of options the Okta provider does not offer yet (as of march 2020). The provider use the Okta API.
-* Active directory
-* Customization Settings, except template email
-* User Mappings
-* API	integrations on preconfigured applications, such as AWS SAML App.
-* SAML Roles on AWS SAML App
-* Hooking up inline token hooks (they can be created and managed but not flipped on)
 
 # Terraform : brief documentation
 ## Providers
@@ -207,6 +195,15 @@ Resources refer to the resources creatable on an Okta environment.
 * user_schema
 * user
 * profile_mapping
+
+#### Limitations of the Okta provider
+This is a list of options the Okta provider does not offer yet (as of march 2020). The provider use the Okta API.
+* Active directory
+* Customization Settings, except template email
+* User Mappings
+* API	integrations on preconfigured applications, such as AWS SAML App.
+* SAML Roles on AWS SAML App
+* Hooking up inline token hooks (they can be created and managed but not flipped on)
 
 ## State
 Terraform must store state about your managed infrastructure and configuration. This state is used by Terraform to map real world resources to your configuration, keep track of metadata, and to improve performance for large infrastructures.
@@ -283,3 +280,12 @@ Configure Atom for easier use of GitHub
     * https://atom.io/packages/language-hcl
     * https://atom.io/packages/atom-beautify
   * [Configure github with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)
+
+	## Links to documentation
+	Useful documentation :
+	* [Terraform docs](https://www.terraform.io/docs/providers/okta/index.html)
+	* [Terraform examples](https://github.com/articulate/terraform-provider-okta/tree/master/examples)
+	* [Source code of the Okta API](https://github.com/articulate/terraform-provider-okta/tree/master/okta)
+	* [guide](https://developer.okta.com/blog/2020/02/03/managing-multiple-okta-instances-with-terraform-cloud)
+	* [Okta as provider for Terraform](https://www.terraform.io/docs/providers/okta/r/user.html)
+	* [Old examples](https://github.com/articulate/terraform-provider-okta-demos/tree/master/terraform)
