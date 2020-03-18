@@ -1,5 +1,7 @@
-# Terraform Cloud w/ Okta
+# Terraform and Okta
 [//]: # (<img style="float: left;" src="hashicorp-terraform-logo.png" alt="Terraform logo" width="193" height="193">)
+
+<img style="float: center;" src="terraform-logo.png" alt="Terraform logo">
 
 Terraform is an orchestration tool that uses declarative code to build, change and version infrastructure that is made up of server instances and services. You can use Okta's official Terraform provider to interact with Okta services. Existing Okta infrastructure can be imported and brought under Terraform management.
 
@@ -246,7 +248,7 @@ This command locates the Okta user with ID 00u26rcjhNGYPMsQU4x6. Then it attache
 As a result of the above command, the resource is recorded in the state file.
 
 # Workaround to import configuration from one environment to another
-I have not found a solution from Terraform to actually import a configuration from a configured OKTA environment to Terraform : there are such solutions with other provider (like AWS or Linode) where you can import a full instance (by using its ID) into Terraform and configure a new environment based on that import. This is because on those providers, the API has a resource type named something like linode_instance or aws_instance which refers to a complete configuration of an environment. The Okta provider (which use the Okta API) has nothing like that...\
+I have not found a solution from Terraform to actually import a configuration from a configured OKTA environment to Terraform : there are such solutions with other provider (like AWS or Linode) where you can import a full instance (by using its ID) into Terraform and configure a new environment based on that import. This is because on those providers, the API has a resource type named something like linode_instance or aws_instance which refers to a complete configuration of an environment. The Okta provider (which use the Okta API) has nothing like that...
 
 As a workaround, I use a chrome extension : [Rockstar](#rockstar-chrome-browser-extension) to retrieve the IDs of some resource (you can see the list of what's retrievable below). I use the extension because I need the list of resources ID that I want to import (the terraform import command needs the ID as argument) and Okta does not provide any practical solution to have all ID of resources in the Okta environment, while the Rockstar extension does provide it.
 
