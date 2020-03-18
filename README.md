@@ -245,7 +245,9 @@ This command locates the Okta user with ID 00u26rcjhNGYPMsQU4x6. Then it attache
 
 As a result of the above command, the resource is recorded in the state file.
 
-
+# Workaround to import configuration from one environment to another
+I have not found a solution from Terraform to actually import a configuration from a configured OKTA environment to Terraform : there are such solutions with other provider (like AWS or Linode) where you can import a full instance (by using its ID) into Terraform and configure a new environment based on that import. This is because on those providers, the API has a resource type named something like linode_instance or aws_instance which reffers to a complete configuration of an environment. The Okta provider (which use the Okta API) has nothing like that...\
+As a workaround, I use a chrome extension ([Rockstar](# Rockstar chrome browser extension))
 
 # Rockstar chrome browser extension
 [link to download](https://chrome.google.com/webstore/detail/rockstar/chjepkekmhealpjipcggnfepkkfeimbd)
@@ -287,8 +289,8 @@ Configure Atom for easier use of GitHub
     * https://atom.io/packages/atom-beautify
   * [Configure github with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)
 
-	## Links to documentation
-	Useful documentation :
+## Links to documentation
+Useful documentation :
 	* [Terraform docs](https://www.terraform.io/docs/providers/okta/index.html)
 	* [Terraform examples](https://github.com/articulate/terraform-provider-okta/tree/master/examples)
 	* [Source code of the Okta API](https://github.com/articulate/terraform-provider-okta/tree/master/okta)
