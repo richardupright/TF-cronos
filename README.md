@@ -13,52 +13,53 @@ Terraform [pricings](https://www.hashicorp.com/products/terraform/pricing/)
 ## Terraform on-prem (CLI)
 See this [guide](https://learn.hashicorp.com/terraform/getting-started/install.html) for more information.
 
-1. Install terraform
-	1.  download the [zip](https://www.terraform.io/downloads.html), extract the *terraform.exe* into *C:/Program Files/Terraform* (only file needed)
-	1.  Add the exe path to the env. variables (environment variables > system var > path > add the path to exe file)
-2. Test connection with Okta
-Create a directory, and in there create a file that Terraform will use later to apply configuration to Okta.
-	1.  mkdir okta-user-schema (this will be the directory)
-	1.  cd okta-user-schema
-	1.  terraform init
-		* Used to initialize a working directory containing Terraform configuration files. This is the first command that should be run after writing a new Terraform configuration or cloning an existing one from version control.
-	1.  create the file "okta.auto.tfvars"
-	This file will be used later by the conf files (a .tf file) to use the Okta provider.
-	```
-		org_name  = "dev-1234"
-		base_url  = "okta.com"
-		api_token = "<your-api-token>"
-	```
-	For all files which match terraform.tfvars or .auto.tfvars present in the current directory, Terraform automatically loads them to populate variables. If the file is named something else, you can use the -var-file flag directly to specify a file.
-	 **DO NOT PUSH THOSE FILES TO A VCS** : you don't want your api token to be public, and your vcs will be public.
-	1. To generate a new Okta API token, log into your Okta administrator console as a superuser and select API -> Tokens from the navigation menu. Next, click the Create Token button and give your token a name, then click Ok and copy the newly generated token into the configuration file above.
-	1.  create the file *identity .tf*
-	This is the conf file that will specify which provider to use (Okta), and then add a custom attributes to the user schema.
-  The name of the file does not matter, Terraform will go through every .tf files located in the directory.
-	```
-		variable "org_name" {}
-		variable "api_token" {}
-		variable "base_url" {}
+### Install terraform
+1.  download the [zip](https://www.terraform.io/downloads.html), extract the *terraform.exe* into *C:/Program Files/Terraform* (only file needed)
+1.  Add the exe path to the env. variables (environment variables > system var > path > add the path to exe file)
 
-		provider "okta" {
-			org_name = var.org_name
-			base_url = var.base_url
-			api_token = var.api_token
-		}
-		resource "okta_user_schema" "dob_extension" {
-			index  = "date_of_birth"
-			title  = "Date of Birth"
-			type   = "string"
-			master = "PROFILE_MASTER"
-		}
-	```
-  When Terraform reads this file, he sees the variables declared but not initialized (no attributes are configured) so it will look for a .tfvars file to fill any variables it can.
-	1. terraform init //you can execute the command as much as you want
-	1. terraform plan
-		* In this step, Terraform will make a comparison between the state and the resources created in the .tf files : the state refers to what Terraform knows from an environment (it's configuration). This means that Terraform will check what resources need to be created/updated/deleted.
-	1. terraform apply
-		* Terraform performs the changes it established in the plan step.
-	1. You should see the result in your Okta tenant (a custom attributes is added to the user profile of okta)
+### Test connection with Okta
+Create a directory, and in there create a file that Terraform will use later to apply configuration to Okta.
+1.  mkdir okta-user-schema (this will be the directory)
+1.  cd okta-user-schema
+1.  terraform init
+	* Used to initialize a working directory containing Terraform configuration files. This is the first command that should be run after writing a new Terraform configuration or cloning an existing one from version control.
+1.  create the file *okta.auto.tfvars*
+This file will be used later by the conf files (a .tf file) to use the Okta provider.
+```
+	org_name  = "dev-1234"
+	base_url  = "okta.com"
+	api_token = "<your-api-token>"
+```
+For all files which match terraform.tfvars or .auto.tfvars present in the current directory, Terraform automatically loads them to populate variables. If the file is named something else, you can use the -var-file flag directly to specify a file.
+ **DO NOT PUSH THOSE FILES TO A VCS** : you don't want your api token to be public, and your vcs will be public.
+1. To generate a new Okta API token, log into your Okta administrator console as a superuser and select API -> Tokens from the navigation menu. Next, click the Create Token button and give your token a name, then click Ok and copy the newly generated token into the configuration file above.
+1.  create the file *identity .tf* in the directory.
+This is the conf file that will specify which provider to use (Okta), and then add a custom attributes to the user schema.
+The name of the file does not matter, Terraform will go through every .tf files located in the directory.
+```
+	variable "org_name" {}
+	variable "api_token" {}
+	variable "base_url" {}
+
+	provider "okta" {
+		org_name = var.org_name
+		base_url = var.base_url
+		api_token = var.api_token
+	}
+	resource "okta_user_schema" "dob_extension" {
+		index  = "date_of_birth"
+		title  = "Date of Birth"
+		type   = "string"
+		master = "PROFILE_MASTER"
+	}
+```
+When Terraform reads this file, he sees the variables declared but not initialized (no attributes are configured) so it will look for a .tfvars file to fill any variables it can.
+1. terraform init //you can execute the command as much as you want
+1. terraform plan
+	* In this step, Terraform will make a comparison between the state and the resources created in the .tf files : the state refers to what Terraform knows from an environment (it's configuration). This means that Terraform will check what resources need to be created/updated/deleted.
+1. terraform apply
+	* Terraform performs the changes it established in the plan step.
+1. You should see the result in your Okta tenant (a custom attributes is added to the user profile of okta)
 
 ## Terraform Cloud
 Start by creating an account for Terraform cloud (free) : [Create an account.](https://app.terraform.io/signup/account)\
