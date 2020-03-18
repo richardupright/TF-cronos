@@ -35,7 +35,6 @@ Create a directory, and in there create a file that Terraform will use later to 
 	1.  create the file *identity .tf*
 	This is the conf file that will specify which provider to use (Okta), and then add a custom attributes to the user schema.
   The name of the file does not matter, Terraform will go through every .tf files located in the directory.
-
 	```
 		variable "org_name" {}
 		variable "api_token" {}
