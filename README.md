@@ -22,14 +22,14 @@ Create a directory, and in there create a file that Terraform will use later to 
 	1.  cd okta-user-schema
 	1.  terraform init
 		* Used to initialize a working directory containing Terraform configuration files. This is the first command that should be run after writing a new Terraform configuration or cloning an existing one from version control.
-	1.  create the file "okta.auto.tfvars"\
-This file will be used later by the conf files (a .tf file) to use the Okta provider.
+	1.  create the file "okta.auto.tfvars"
+	This file will be used later by the conf files (a .tf file) to use the Okta provider.
 	```
 		org_name  = "dev-1234"
 		base_url  = "okta.com"
 		api_token = "<your-api-token>"
 	```
-	For all files which match terraform.tfvars or .auto.tfvars present in the current directory, Terraform automatically loads them to populate variables. If the file is named something else, you can use the -var-file flag directly to specify a file.\
+	For all files which match terraform.tfvars or .auto.tfvars present in the current directory, Terraform automatically loads them to populate variables. If the file is named something else, you can use the -var-file flag directly to specify a file.
 	 **DO NOT PUSH THOSE FILES TO A VCS** : you don't want your api token to be public, and your vcs will be public.
 	1. To generate a new Okta API token, log into your Okta administrator console as a superuser and select API -> Tokens from the navigation menu. Next, click the Create Token button and give your token a name, then click Ok and copy the newly generated token into the configuration file above.
 	1.  create the file *identity .tf*
